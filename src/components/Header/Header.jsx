@@ -5,11 +5,9 @@ import "./Header.css";
 function Header(props) {
   return (
     <header className="header">
-      <div className="header__container">
-        <Link to="/" className="header__link">
-          <img className="header__logo" src={logo} alt="логотип" />
-        </Link>
-      </div>
+      <Link to="/" className="header__link">
+        <img className="header__logo" src={logo} alt="логотип" />
+      </Link>
       {props.children}
     </header>
   );
