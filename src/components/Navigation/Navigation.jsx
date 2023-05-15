@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 function Navigation({ isAuthorized, isMenuActive, onClickBurgerBtn }) {
   const handleOnClickBurger = () => {
-    onClickBurgerBtn(isMenuActive);
+    onClickBurgerBtn();
   };
 
   return (

@@ -1,7 +1,6 @@
 import React from "react";
 import "./App.css";
-import Header from "./Header/Header";
-import Navigation from "./Navigation/Navigation";
+import Main from "./Main/Main";
 
 function App() {
   const [isMenuActive, setIsMenuActive] = React.useState(false);
@@ -12,13 +11,11 @@ function App() {
   };
   return (
     <div className="App">
-      <Header>
-        <Navigation
-          isAuthorized={isAuthorized}
-          isMenuActive={isMenuActive}
-          onClickBurgerBtn={handleBurgerBtnClick}
-        />
-      </Header>
+      <Main
+        isAuthorized={isAuthorized}
+        isMenuActive={isMenuActive}
+        onClickBurgerBtn={handleBurgerBtnClick}
+      ></Main>
     </div>
   );
 }
