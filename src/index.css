@@ -2,6 +2,7 @@
 @import url('./vendor/fonts/inter.css');
 body {
   margin: 0;
+  line-height: 1;
   font-family: "Inter", Arial, sans-serif;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
@@ -20,4 +21,5 @@ body {
   --light-grey-text: #a0a0a0;
   --pink: #ee3465;
   --blue: #4285f4;
+  --grey-line: #424242;
 }

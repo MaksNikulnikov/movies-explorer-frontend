@@ -2,10 +2,11 @@ import "./Main.css";
 import React from "react";
 import Header from "../Header/Header";
 import Navigation from "../Navigation/Navigation";
+import Footer from "../Footer/Footer";
 
 function Main({ isAuthorized, isMenuActive, onClickBurgerBtn }) {
   return (
-    <main className="main">
+    <>
       <Header>
         <Navigation
           isAuthorized={isAuthorized}
@@ -13,7 +14,9 @@ function Main({ isAuthorized, isMenuActive, onClickBurgerBtn }) {
           onClickBurgerBtn={onClickBurgerBtn}
         />
       </Header>
-    </main>
+      <main className="main"></main>
+      <Footer />
+    </>
   );
 }
 
