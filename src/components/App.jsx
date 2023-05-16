@@ -6,7 +6,7 @@ function App() {
   const [isMenuActive, setIsMenuActive] = React.useState(false);
   const [isAuthorized, setIsAuthorized] = React.useState(true);
 
-  const handleBurgerBtnClick = (isMenuActive) => {
+  const handleBurgerBtnClick = () => {
     setIsMenuActive(!isMenuActive);
   };
   return (

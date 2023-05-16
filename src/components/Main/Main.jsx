@@ -3,6 +3,7 @@ import React from "react";
 import Header from "../Header/Header";
 import Navigation from "../Navigation/Navigation";
 import Footer from "../Footer/Footer";
+import Promo from "../Promo/Promo";
 
 function Main({ isAuthorized, isMenuActive, onClickBurgerBtn }) {
   return (
@@ -14,7 +15,9 @@ function Main({ isAuthorized, isMenuActive, onClickBurgerBtn }) {
           onClickBurgerBtn={onClickBurgerBtn}
         />
       </Header>
-      <main className="main"></main>
+      <main className="main">
+        <Promo />
+      </main>
       <Footer />
     </>
   );
