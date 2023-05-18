@@ -47,7 +47,7 @@
   font-size: calc(14px - (1280px - 100vw) / 512 * (14 - 12));
   font-weight: 400;
   line-height: calc(20px - (1280px - 100vw) / 512 * (20 - 18));
-  letter-spacing: -0.04em;
+  letter-spacing: -1.1px;
   text-align: center;
 }
 

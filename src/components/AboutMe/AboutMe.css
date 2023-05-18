@@ -1,0 +1,153 @@
+.about-me {
+  min-height: calc(654px - (1280px - 100vw) / 512 * (654 - 604));
+  max-width: calc(1140px - (1280px - 100vw) / 512 * (1140 - 686));
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  color: var(--white-text);
+}
+
+.about-me__title {
+  margin: 0;
+  margin-top: calc(110px - (1280px - 100vw) / 512 * (110 - 90));
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 27px;
+  letter-spacing: -0.04em;
+  text-align: left;
+}
+
+.about-me__container {
+  margin-top: 23px;
+  display: flex;
+  justify-content: space-between;
+  min-height: calc(493px - (1280px - 100vw) / 512 * (493 - 463));
+  border-top: 1px var(--light-grey-line) solid;
+  width: 100%;
+}
+
+.about-me__text-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+}
+
+.about-me__name {
+  margin: 0;
+  margin-top: 66px;
+  font-size: calc(50px - (1280px - 100vw) / 512 * (50 - 40));
+  font-weight: 400;
+  line-height: calc(58px - (1280px - 100vw) / 512 * (58 - 40));
+  letter-spacing: -0.04em;
+  text-align: left;
+}
+
+.about-me__subtitle {
+  margin: 0;
+  margin-top: calc(18px - (1280px - 100vw) / 512 * (18 - 16));
+  font-size: calc(18px - (1280px - 100vw) / 512 * (18 - 12));
+  font-weight: 500;
+  line-height: calc(20px - (1280px - 100vw) / 512 * (20 - 18));
+  text-align: left;
+}
+
+.about-me__text {
+  margin: 0;
+  margin-top: calc(26px - (1280px - 100vw) / 512 * (26 - 20));
+  font-size: calc(14px - (1280px - 100vw) / 512 * (14 - 12));
+  font-weight: 400;
+  line-height: calc(22px - (1280px - 100vw) / 512 * (22 - 18));
+  text-align: left;
+  max-width: calc(600px - (1280px - 100vw) / 512 * (600 - 364));
+  width: 100%;
+}
+
+.about-me__link {
+  margin: 0;
+  margin-top: calc(99px - (1280px - 100vw) / 512 * (99 - 87));
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 17px;
+  text-align: left;
+  color: var(--white-text);
+}
+
+.about-me__photo {
+  margin-top: 66px;
+  max-width: calc(270px - (1280px - 100vw) / 512 * (270 - 255));
+  width: 100%;
+  height: calc(327px - (1280px - 100vw) / 512 * (327 - 307));
+  border-radius: 10px;
+  object-fit: cover;
+  object-position: 50% 10%;
+}
+
+
+
+
+@media screen and (max-width: 768px) {
+  .about-me {
+    min-height: calc(604px - (768px - 100vw) / 448 * (604 - 904));
+    max-width: calc(686px - (768px - 100vw) / 448 * (686 - 292));
+  }
+
+  .about-me__title {
+    margin-top: calc(90px - (768px - 100vw) / 448 * (90 - 70));
+    font-size: calc(22px - (768px - 100vw) / 448 * (22 - 18));
+    line-height: calc(27px - (768px - 100vw) / 448 * (27 - 22));
+  }
+
+  .about-me__container {
+    margin-top: calc(23px - (768px - 100vw) / 448 * (23 - 28));
+    min-height: calc(463px - (768px - 100vw) / 448 * (463 - 783));
+  }
+
+  .about-me__name {
+    margin-top: calc(66px - (768px - 100vw) / 448 * (66 - 40));
+    font-size: calc(40px - (768px - 100vw) / 448 * (40 - 30));
+    line-height: calc(40px - (768px - 100vw) / 448 * (40 - 37));
+  }
+
+  .about-me__subtitle {
+    margin-top: calc(16px - (768px - 100vw) / 448 * (16 - 20));
+    font-size: calc(12px - (768px - 100vw) / 448 * (12 - 11));
+    line-height: calc(18px - (768px - 100vw) / 448 * (18 - 16));
+  }
+
+  .about-me__text {
+    font-size: calc(12px - (768px - 100vw) / 448 * (12 - 11));
+    line-height: calc(18px - (768px - 100vw) / 448 * (18 - 16));
+    max-width: calc(364px - (768px - 100vw) / 448 * (364 - 22));
+  }
+
+  .about-me__link {
+    margin-top: calc(87px - (768px - 100vw) / 448 * (87 - 40));
+  }
+
+  .about-me__photo {
+    margin-top: calc(66px - (768px - 100vw) / 448 * (66 - 60));
+    max-width: calc(255px - (768px - 100vw) / 448 * (255 - 230));
+    height: calc(307px - (768px - 100vw) / 448 * (307 - 290));
+  }
+}
+
+@media screen and (max-width: 600px) {
+    .about-me__container {
+      flex-direction: column-reverse;
+      justify-content: start;
+    }
+  
+    .about-me__text {
+      max-width: none;
+      width: 100%;
+    }
+  
+    .about-me__photo {
+      max-width: calc(255px - (768px - 100vw) / 448 * (255 - 292));
+      height: calc(307px - (768px - 100vw) / 448 * (307 - 352));
+      align-self: center;
+    }
+  }

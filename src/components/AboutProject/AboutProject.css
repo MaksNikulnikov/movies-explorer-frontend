@@ -1,7 +1,7 @@
 .about-project {
   color: var(--white-text);
   min-height: calc(608px - (1280px - 100vw) / 512 * (608 - 585));
-  max-width: calc(1140px - (1280px - 100vw) / 512 * (1140 - 686));
+  max-width: calc(1140px - (1280px - 100vw) / 512 * (1140 - 668));
   width: 100%;
   display: flex;
   flex-direction: column;
