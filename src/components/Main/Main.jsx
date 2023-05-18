@@ -7,6 +7,7 @@ import Promo from "../Promo/Promo";
 import AboutProject from "../AboutProject/AboutProject";
 import Techs from "../Techs/Techs";
 import AboutMe from "../Aboutme/AboutMe";
+import Portfolio from "../Portfolio/Portfolio";
 
 function Main({ isAuthorized, isMenuActive, onClickBurgerBtn }) {
   return (
@@ -23,6 +24,7 @@ function Main({ isAuthorized, isMenuActive, onClickBurgerBtn }) {
         <AboutProject />
         <Techs />
         <AboutMe />
+        <Portfolio />
       </main>
       <Footer />
     </>
