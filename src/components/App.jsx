@@ -1,6 +1,7 @@
 import React from "react";
 import "./App.css";
 import Main from "./Main/Main";
+import SearchForm from "./SearchForm/SearchForm";
 
 function App() {
   const [isMenuActive, setIsMenuActive] = React.useState(false);
@@ -11,6 +12,7 @@ function App() {
   };
   return (
     <div className="App">
+      <SearchForm />
       <Main
         isAuthorized={isAuthorized}
         isMenuActive={isMenuActive}

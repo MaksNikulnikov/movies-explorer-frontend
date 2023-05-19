@@ -12,6 +12,7 @@ body {
   text-rendering: optimizeLegibility;
   --dark-grey: #202020;
   --medium-grey: #272727;
+  --grey: #2f2f2f;
   --light-grey: #303030;
   --light-green: #3ddc84;
   --medium-green: #2be080;

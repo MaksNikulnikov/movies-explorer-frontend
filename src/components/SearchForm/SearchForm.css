@@ -1,0 +1,48 @@
+.form-movies {
+  min-height: 228px;
+  max-width: 100vw;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.form-movies__form {
+  margin-top: 80px;
+  min-height: 217px;
+  max-width: 1140px;
+  width: 100%;
+  border-bottom: 1px var(--grey-line) solid;
+  display: grid;
+  grid-template-columns: 1060px 60px;
+  column-gap: 10px;
+  row-gap: 31px;
+  justify-content: center;
+  align-content: baseline;
+}
+
+.form-movies__submit-btn {
+  border: none;
+  box-shadow: none;
+  margin: 0;
+  border-radius: 3px;
+  background-color: var(--blue);
+  color: var(--white-text);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 18px;
+  text-align: center;
+  width: 100%;
+  min-height: 44px;
+  cursor: pointer;
+}
+
+.form-movies__input {
+  background-color: var(--grey);
+  border-radius: 4px;
+  border: none;
+  color: var(--white-text);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 18px;
+  padding-left: 22px;
+}
