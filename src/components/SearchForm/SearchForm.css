@@ -9,11 +9,11 @@
 .form-movies__form {
   margin-top: 80px;
   min-height: 217px;
-  max-width: 1140px;
+  max-width: calc(1140px - (1280px - 100vw) / 512 * (1140 - 708));
   width: 100%;
   border-bottom: 1px var(--grey-line) solid;
   display: grid;
-  grid-template-columns: 1060px 60px;
+  grid-template-columns: 1fr 70px;
   column-gap: 10px;
   row-gap: 31px;
   justify-content: center;
@@ -44,5 +44,18 @@
   font-size: 14px;
   font-weight: 400;
   line-height: 18px;
+  padding: 0;
   padding-left: 22px;
+}
+
+@media screen and (max-width: 768px) {
+  .form-movies__form {
+    max-width: calc(708px - (768px - 100vw) / 448 * (708 - 292));
+    min-height: calc(217px - (768px - 100vw) / 448 * (217 - 232));
+    row-gap: calc(31px - (768px - 100vw) / 448 * (31 - 45));
+  }
+}
+
+.form-movies {
+  min-height: calc(228px - (768px - 100vw) / 448 * (228 - 243));
 }

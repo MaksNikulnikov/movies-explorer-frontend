@@ -1,7 +1,8 @@
 import React from "react";
 import "./App.css";
 import Main from "./Main/Main";
-import SearchForm from "./SearchForm/SearchForm";
+import { Route, Routes } from "react-router-dom";
+import Movies from "./Movies/Movies";
 
 function App() {
   const [isMenuActive, setIsMenuActive] = React.useState(false);
@@ -11,13 +12,29 @@ function App() {
     setIsMenuActive(!isMenuActive);
   };
   return (
-    <div className="App">
-      <SearchForm />
-      <Main
-        isAuthorized={isAuthorized}
-        isMenuActive={isMenuActive}
-        onClickBurgerBtn={handleBurgerBtnClick}
-      ></Main>
+    <div className="root">
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <Main
+              isAuthorized={isAuthorized}
+              isMenuActive={isMenuActive}
+              onClickBurgerBtn={handleBurgerBtnClick}
+            />
+          }
+        ></Route>
+        <Route
+          path="/movies"
+          element={
+            <Movies
+              isAuthorized={isAuthorized}
+              isMenuActive={isMenuActive}
+              onClickBurgerBtn={handleBurgerBtnClick}
+            />
+          }
+        ></Route>
+      </Routes>
     </div>
   );
 }

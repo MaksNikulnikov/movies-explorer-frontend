@@ -1,11 +1,12 @@
 import "./SearchForm.css";
 import React from "react";
+import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
 
-function SearchForm() {
+function SearchForm({ shortMovies, handleShortMovies }) {
   const [query, setQuery] = React.useState("");
   const handleSubmit = (e) => {
     e.preventDefault();
-    setQuery('');
+    setQuery("");
   };
 
   const handleChange = (e) => {
@@ -25,6 +26,10 @@ function SearchForm() {
         <button type="submit" className="form-movies__submit-btn">
           Найти
         </button>
+        <FilterCheckbox
+          shortMovies={shortMovies}
+          handleShortMovies={handleShortMovies}
+        />
       </form>
     </section>
   );
