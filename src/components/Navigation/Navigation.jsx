@@ -1,15 +1,18 @@
 import "./Navigation.css";
 import React from "react";
 import { Link } from "react-router-dom";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
-function Navigation({ isAuthorized, isMenuActive, onClickBurgerBtn }) {
+function Navigation({ isMenuActive, onClickBurgerBtn }) {
+  const currentUser = React.useContext(CurrentUserContext)
+  
   const handleOnClickBurger = () => {
     onClickBurgerBtn();
   };
 
   return (
     <>
-      {!isAuthorized ? (
+      {!currentUser.name ? (
         <nav>
           <ul className="navigation__list">
             <li>

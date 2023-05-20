@@ -9,12 +9,11 @@ import Techs from "../Techs/Techs";
 import AboutMe from "../Aboutme/AboutMe";
 import Portfolio from "../Portfolio/Portfolio";
 
-function Main({ isAuthorized, isMenuActive, onClickBurgerBtn }) {
+function Main({ isMenuActive, onClickBurgerBtn }) {
   return (
     <>
       <Header>
         <Navigation
-          isAuthorized={isAuthorized}
           isMenuActive={isMenuActive}
           onClickBurgerBtn={onClickBurgerBtn}
         />
