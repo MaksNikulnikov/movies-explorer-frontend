@@ -39,6 +39,9 @@
     font-size: 12px;
     line-height: 18;
     right: 16px;
+    height: inherit;
+    bottom: 97px;
+    left: 48px;
   }
   
   .filter__tumbler {
@@ -66,6 +69,7 @@
   
   @media screen and (max-width: 768px) {  
     .filter__text {
-      font-size: calc(12px - (768px - 100vw) / 448 * (12 - 11))
+      font-size: calc(12px - (768px - 100vw) / 448 * (12 - 11));
+      bottom: calc(97px - (768px - 100vw) / 448 * (97 - 90));
     }
   }
