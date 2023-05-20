@@ -12,11 +12,11 @@ function Navigation({ isMenuActive, onClickBurgerBtn }) {
 
   return (
     <>
-      {!currentUser.name ? (
+      {currentUser.name ? (
         <nav>
           <ul className="navigation__list">
             <li>
-              <Link to="signup" className="navigation__link">
+              <Link to="signup" className="navigation__link navigation__link_type_register">
                 Регистрация
               </Link>
             </li>
