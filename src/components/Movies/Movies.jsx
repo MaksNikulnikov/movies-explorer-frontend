@@ -4,8 +4,9 @@ import Header from "../Header/Header";
 import Navigation from "../Navigation/Navigation";
 import Footer from "../Footer/Footer";
 import SearchForm from "../SearchForm/SearchForm";
+import MovieCardList from "../MovieCardList/MovieCardList";
 
-function Movies({isAuthorized, isMenuActive, onClickBurgerBtn}) {
+function Movies({movies, isMenuActive, onClickBurgerBtn}) {
   const [shortMovies, setShortMovies] = React.useState(false);
 
   function handleShortMovies() {
@@ -16,13 +17,13 @@ function Movies({isAuthorized, isMenuActive, onClickBurgerBtn}) {
     <>
       <Header>
         <Navigation
-          isAuthorized={isAuthorized}
           isMenuActive={isMenuActive}
           onClickBurgerBtn={onClickBurgerBtn}
         />
       </Header>
       <main className="movies">
         <SearchForm handleShortMovies={handleShortMovies} shortMovies={shortMovies}/>
+        <MovieCardList movies={movies}/>
       </main>
       <Footer />
     </>
