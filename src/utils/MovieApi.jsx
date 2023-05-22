@@ -2,7 +2,11 @@ import { falseMovies } from "./constants";
 
 class MovieApi {
   getMovies = () => {
-    return falseMovies; 
+    return falseMovies;
+  };
+
+  getSavedMovies = () => {
+    return falseMovies;
   };
 }
 

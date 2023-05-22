@@ -60,6 +60,13 @@
   color: var(--pink);
 }
 
+.movie-card__button_unsave {
+  background-image: url(../../images/x.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  color: var(--light-grey);
+}
+
 @media screen and (max-width: 768px) {
   .movie-card-list {
     max-width: calc(708px - (768px - 100vw) / 448 * (708 - 300));

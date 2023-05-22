@@ -6,22 +6,26 @@ import Movies from "./Movies/Movies";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import Preloader from "./Preloader/Preloader";
 import movieApi from "../utils/MovieApi";
+import SavedMovies from "./SavedMovies/SavedMovies";
 
 function App() {
   const [isMenuActive, setIsMenuActive] = React.useState(false);
   const [currentUser, setCurrentUser] = React.useState({});
   const [isLoading, setIsLoading] = React.useState(false);
   const [movies, setMovies] = React.useState([]);
+  const [savedMovies, setSavedMovies] = React.useState([]);
 
   const handleBurgerBtnClick = () => {
     setIsMenuActive(!isMenuActive);
   };
 
   React.useEffect(() => {
-    console.log('useEffect',movieApi.getMovies())
     setMovies(movieApi.getMovies());
-    
   }, [movies]);
+
+  React.useEffect(() => {
+    setSavedMovies(movieApi.getSavedMovies());
+  }, [savedMovies]);
 
   return (
     <>
@@ -42,6 +46,16 @@ function App() {
               element={
                 <Movies
                   movies={movies}
+                  isMenuActive={isMenuActive}
+                  onClickBurgerBtn={handleBurgerBtnClick}
+                />
+              }
+            ></Route>
+            <Route
+              path="/saved-movies"
+              element={
+                <SavedMovies
+                  movies={savedMovies}
                   isMenuActive={isMenuActive}
                   onClickBurgerBtn={handleBurgerBtnClick}
                 />

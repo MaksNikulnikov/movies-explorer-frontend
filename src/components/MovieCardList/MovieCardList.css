@@ -23,6 +23,10 @@
   padding: 0;
 }
 
+.movie-card-list__container_type_saved-movies {
+  margin-bottom: calc(230px - (1280px - 100vw) / 512 * (230 - 170));
+}
+
 .movie-card-list__button {
   color: var(--white-text);
   font-size: 12px;
@@ -53,6 +57,9 @@
     );
     column-gap: 24px;
     row-gap: calc(35px - (768px - 100vw) / 448 * (35 - 16));
+  }
+  .movie-card-list__container_type_saved-movies {
+    margin-bottom: 170px;
   }
 
   .movie-card-list__button {
