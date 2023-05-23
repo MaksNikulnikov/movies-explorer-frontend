@@ -7,6 +7,7 @@ import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import Preloader from "./Preloader/Preloader";
 import movieApi from "../utils/MovieApi";
 import SavedMovies from "./SavedMovies/SavedMovies";
+import Login from "./Login/Login";
 
 function App() {
   const [isMenuActive, setIsMenuActive] = React.useState(false);
@@ -40,7 +41,7 @@ function App() {
                   onClickBurgerBtn={handleBurgerBtnClick}
                 />
               }
-            ></Route>
+            />
             <Route
               path="/movies"
               element={
@@ -50,7 +51,7 @@ function App() {
                   onClickBurgerBtn={handleBurgerBtnClick}
                 />
               }
-            ></Route>
+            />
             <Route
               path="/saved-movies"
               element={
@@ -60,7 +61,18 @@ function App() {
                   onClickBurgerBtn={handleBurgerBtnClick}
                 />
               }
-            ></Route>
+            />
+            <Route
+              path="/saved-movies"
+              element={
+                <SavedMovies
+                  movies={savedMovies}
+                  isMenuActive={isMenuActive}
+                  onClickBurgerBtn={handleBurgerBtnClick}
+                />
+              }
+            />
+            <Route path="/signin" element={<Login />} />
           </Routes>
         </div>
       </CurrentUserContext.Provider>
