@@ -10,6 +10,7 @@ export default function Login() {
 
   function handleSubmit(e) {
     e.preventDefault();
+    resetForm();
   }
 
   useEffect(() => {
@@ -71,7 +72,7 @@ export default function Login() {
           </button>
           <span className="login__support">
             Ещё не зарегистрированы?&nbsp;
-            <Link to="signup" className="login__regiatration-link">
+            <Link to="/signup" className="login__regiatration-link">
               Регистрация
             </Link>
           </span>

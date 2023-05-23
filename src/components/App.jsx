@@ -8,6 +8,7 @@ import Preloader from "./Preloader/Preloader";
 import movieApi from "../utils/MovieApi";
 import SavedMovies from "./SavedMovies/SavedMovies";
 import Login from "./Login/Login";
+import Register from "./Register/Register";
 
 function App() {
   const [isMenuActive, setIsMenuActive] = React.useState(false);
@@ -73,6 +74,7 @@ function App() {
               }
             />
             <Route path="/signin" element={<Login />} />
+            <Route path="/signup" element={<Register />} />
           </Routes>
         </div>
       </CurrentUserContext.Provider>
