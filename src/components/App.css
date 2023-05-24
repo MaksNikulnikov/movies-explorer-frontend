@@ -3,6 +3,6 @@
   flex-direction: column;
   align-items: center;
   background: var(--dark-grey);
-  max-width: 1280px;
+  width: 100%;
   margin: 0 auto;
 }

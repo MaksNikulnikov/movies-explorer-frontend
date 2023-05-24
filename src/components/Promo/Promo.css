@@ -1,8 +1,8 @@
 .promo {
   margin-top: 20px;
-  max-width: calc(1200px - (1280px - 100vw) / 512 * (1200 - 728));
+  max-width: 1200px;
   width: 100%;
-  min-height: calc(493px - (1280px - 100vw) / 512 * (493 - 834));
+  min-height: 493px;
   border-radius: 10px;
   background-color: var(--medium-grey);
   display: flex;
@@ -13,18 +13,18 @@
 
 .promo__title {
   font-weight: 400;
-  font-size: calc(50px - (1280px - 100vw) / 512 * (50 - 40));
-  line-height: calc(58px - (1280px - 100vw) / 512 * (58 - 52));
+  font-size: 50px;
+  line-height: 58px;
   margin: 0;
-  margin-top: calc(160px - (1280px - 100vw) / 512 * (160 - 350));
+  margin-top: 160px;
   color: var(--white-text);
-  max-width: calc(730px - (1280px - 100vw) / 512 * (730 - 680));
+  max-width: 730px;
   text-align: center;
   letter-spacing: -1.1px;
 }
 
 .promo__link-container {
-  margin-top: calc(151px - (1280px - 100vw) / 512 * (151 - 314));
+  margin-top: 151px;
 }
 
 .promo__list {
@@ -49,6 +49,24 @@
   text-align: center;
   padding-top: 10px;
   box-sizing: border-box;
+}
+
+@media screen and (max-width: 1280px) {
+  .promo {
+    max-width: calc(1200px - (1280px - 100vw) / 512 * (1200 - 728));
+    min-height: calc(493px - (1280px - 100vw) / 512 * (493 - 834));
+  }
+  
+  .promo__title {
+    font-size: calc(50px - (1280px - 100vw) / 512 * (50 - 40));
+    line-height: calc(58px - (1280px - 100vw) / 512 * (58 - 52));
+    margin-top: calc(160px - (1280px - 100vw) / 512 * (160 - 350));
+    max-width: calc(730px - (1280px - 100vw) / 512 * (730 - 680));
+  }
+  
+  .promo__link-container {
+    margin-top: calc(151px - (1280px - 100vw) / 512 * (151 - 314));
+  }
 }
 
 @media screen and (max-width: 768px) {

@@ -66,7 +66,7 @@ function Navigation({ isMenuActive, onClickBurgerBtn }) {
               </li>
               <li className="navigation__list-item">
                 <Link
-                  to="movies"
+                  to="/movies"
                   className="link navigation__link navigation__link_type_menu navigation__link_type_movies navigation__link_state_active"
                   tabIndex={`${isMenuActive ? "" : "-1"}`}
                 >
@@ -75,7 +75,7 @@ function Navigation({ isMenuActive, onClickBurgerBtn }) {
               </li>
               <li className="navigation__list-item">
                 <Link
-                  to="saved-movies"
+                  to="/saved-movies"
                   className="link navigation__link navigation__link_type_menu navigation__link_type_saved-movies"
                   tabIndex={`${isMenuActive ? "" : "-1"}`}
                 >
@@ -84,7 +84,7 @@ function Navigation({ isMenuActive, onClickBurgerBtn }) {
               </li>
               <li className="navigation__list-item">
                 <Link
-                  to="profile"
+                  to="/profile"
                   className="link navigation__link navigation__link_type_account"
                   tabIndex={`${isMenuActive ? "" : "-1"}`}
                 >

@@ -1,7 +1,7 @@
 .about-project {
   color: var(--white-text);
-  min-height: calc(608px - (1280px - 100vw) / 512 * (608 - 585));
-  max-width: calc(1140px - (1280px - 100vw) / 512 * (1140 - 668));
+  min-height: 608px;
+  max-width: 1140px;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -9,7 +9,7 @@
 }
 
 .about-project__title {
-  margin-top: calc(110px - (1280px - 100vw) / 512 * (110 - 90));
+  margin-top: 110px;
   margin-bottom: 0;
   font-weight: 400;
   font-size: 22px;
@@ -29,15 +29,15 @@
   padding: 0;
   margin-bottom: 0;
   display: flex;
-  min-height: calc(287px - (1280px - 100vw) / 512 * (287 - 270));
-  gap: calc(40px - (1280px - 100vw) / 512 * (40 - 30));
+  min-height: 287px;
+  gap: 40px;
 }
 
 .about-project__text-item {
   display: flex;
   flex-direction: column;
-  gap: calc(26px - (1280px - 100vw) / 512 * (26 - 22));
-  min-width: calc(550px - (1280px - 100vw) / 512 * (550 - 319));
+  gap: 26px;
+  min-width: 550px;
   width: 100%;
 }
 .about-project__text-item_title {
@@ -51,9 +51,9 @@
 
 .about-project__text-item_text {
   margin: 0;
-  font-size: calc(14px - (1280px - 100vw) / 512 * (14 - 12));
+  font-size: 14px;
   font-weight: 400;
-  line-height: calc(20px - (1280px - 100vw) / 512 * (20 - 18));
+  line-height: 20px;
   text-align: left;
 }
 
@@ -61,7 +61,7 @@
   min-height: 72px;
   width: 100%;
   display: grid;
-  grid-template-columns: calc(228px - (1280px - 100vw) / 512 * (228 - 140)) auto;
+  grid-template-columns: 228px auto;
 }
 
 .about-project__table_data {
@@ -84,6 +84,37 @@
 .about-project__table_data:nth-of-type(2) {
   color: var(--white-text);
   background-color: var(--light-grey);
+}
+
+@media screen and (max-width: 768px) {
+ 
+  .about-project {
+    min-height: calc(608px - (1280px - 100vw) / 512 * (608 - 585));
+    max-width: calc(1140px - (1280px - 100vw) / 512 * (1140 - 668));
+  }
+  
+  .about-project__title {
+    margin-top: calc(110px - (1280px - 100vw) / 512 * (110 - 90));
+  }
+  
+  .about-project__text-container {
+    min-height: calc(287px - (1280px - 100vw) / 512 * (287 - 270));
+    gap: calc(40px - (1280px - 100vw) / 512 * (40 - 30));
+  }
+  
+  .about-project__text-item {
+    gap: calc(26px - (1280px - 100vw) / 512 * (26 - 22));
+    min-width: calc(550px - (1280px - 100vw) / 512 * (550 - 319));
+  }
+  
+  .about-project__text-item_text {
+    font-size: calc(14px - (1280px - 100vw) / 512 * (14 - 12));
+    line-height: calc(20px - (1280px - 100vw) / 512 * (20 - 18));
+  }
+  
+  .about-project__table {
+    grid-template-columns: calc(228px - (1280px - 100vw) / 512 * (228 - 140)) auto;
+  }
 }
 
 @media screen and (max-width: 768px) {
