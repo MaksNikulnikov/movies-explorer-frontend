@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css";
 import Main from "./Main/Main";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import Movies from "./Movies/Movies";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import Preloader from "./Preloader/Preloader";
@@ -9,8 +9,10 @@ import movieApi from "../utils/MovieApi";
 import SavedMovies from "./SavedMovies/SavedMovies";
 import Login from "./Login/Login";
 import Register from "./Register/Register";
+import NotFound from "./NotFound/NotFound";
 
 function App() {
+  const navigate = useNavigate();
   const [isMenuActive, setIsMenuActive] = React.useState(false);
   const [currentUser, setCurrentUser] = React.useState({});
   const [isLoading, setIsLoading] = React.useState(false);
@@ -19,6 +21,10 @@ function App() {
 
   const handleBurgerBtnClick = () => {
     setIsMenuActive(!isMenuActive);
+  };
+
+  const goBack = () => {
+    navigate(-1);
   };
 
   React.useEffect(() => {
@@ -75,6 +81,7 @@ function App() {
             />
             <Route path="/signin" element={<Login />} />
             <Route path="/signup" element={<Register />} />
+            <Route path="*" element={<NotFound goBack={goBack} />} />
           </Routes>
         </div>
       </CurrentUserContext.Provider>
