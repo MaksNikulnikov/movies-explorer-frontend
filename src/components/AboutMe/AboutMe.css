@@ -88,7 +88,7 @@
 @media screen and (max-width: 1280px) {
   .about-me {
     min-height: calc(654px - (1280px - 100vw) / 512 * (654 - 604));
-    max-width: calc(1140px - (1280px - 100vw) / 512 * (1140 - 686));
+    max-width: calc(1140px - (1280px - 100vw) / 512 * (1140 - 668));
   }
 
   .about-me__title {
@@ -130,7 +130,7 @@
 @media screen and (max-width: 768px) {
   .about-me {
     min-height: calc(604px - (768px - 100vw) / 448 * (604 - 904));
-    max-width: calc(686px - (768px - 100vw) / 448 * (686 - 292));
+    max-width: calc(668px - (768px - 100vw) / 448 * (668 - 292));
   }
 
   .about-me__title {
@@ -140,7 +140,7 @@
   }
 
   .about-me__container {
-    margin-top: calc(23px - (768px - 100vw) / 448 * (23 - 28));
+    margin-top: calc(23px - (768px - 100vw) / 448 * (23 - 26));
     min-height: calc(463px - (768px - 100vw) / 448 * (463 - 783));
   }
 
@@ -160,6 +160,7 @@
     font-size: calc(12px - (768px - 100vw) / 448 * (12 - 11));
     line-height: calc(18px - (768px - 100vw) / 448 * (18 - 16));
     max-width: calc(364px - (768px - 100vw) / 448 * (364 - 22));
+    margin-top: 20px;
   }
 
   .about-me__link {

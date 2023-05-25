@@ -20,7 +20,7 @@
   color: var(--white-text);
   max-width: 730px;
   text-align: center;
-  letter-spacing: -1.1px;
+  letter-spacing: -0.04em;
 }
 
 .promo__link-container {
@@ -47,7 +47,7 @@
   line-height: 16px;
   text-decoration: none;
   text-align: center;
-  padding-top: 10px;
+  padding-top: 9px;
   box-sizing: border-box;
 }
 
@@ -71,6 +71,7 @@
 
 @media screen and (max-width: 768px) {
   .promo {
+    margin-top: calc(20px - (768px - 100vw) / 448 * (20 - 14));
     max-width: calc(728px - (768px - 100vw) / 448 * (728 - 292));
     min-height: calc(834px - (768px - 100vw) / 448 * (834 - 586));
   }
