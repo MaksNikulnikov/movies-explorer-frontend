@@ -75,7 +75,6 @@ export default function Register() {
             </label>
           </div>
         </div>
-
         <div className="register__form_footer">
           <button
             type="submit"

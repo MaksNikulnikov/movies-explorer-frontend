@@ -10,6 +10,7 @@ import SavedMovies from "./SavedMovies/SavedMovies";
 import Login from "./Login/Login";
 import Register from "./Register/Register";
 import NotFound from "./NotFound/NotFound";
+import Profile from "./Profile/Profile";
 
 function App() {
   const navigate = useNavigate();
@@ -69,18 +70,17 @@ function App() {
                 />
               }
             />
+            <Route path="/signin" element={<Login />} />
+            <Route path="/signup" element={<Register />} />
             <Route
-              path="/saved-movies"
+              path="/profile"
               element={
-                <SavedMovies
-                  movies={savedMovies}
+                <Profile
                   isMenuActive={isMenuActive}
                   onClickBurgerBtn={handleBurgerBtnClick}
                 />
               }
             />
-            <Route path="/signin" element={<Login />} />
-            <Route path="/signup" element={<Register />} />
             <Route path="*" element={<NotFound goBack={goBack} />} />
           </Routes>
         </div>
