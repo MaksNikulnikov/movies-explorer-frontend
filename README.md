@@ -1,70 +1,51 @@
-# Getting Started with Create React App
+# ***Проект Movies-explorer (фронтенд)***
+Данный проект является дипломной работой на курсе веб-разработчик ***Яндекс.Практикума***.
+## *Описание*
+----
+### ***О чём проект?***
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Данное вэб-приложение является портфолио разработчика. С начального экрана можно по ссылкам перейти на другие мои проекты, можно зарегистрироваться и пройти в другую часть сайта (все страницы кроме титульной).
+В этой части находится React single page application функционал которого поддерживает:
+* поиск фильмов из имеющихся в библиотеки (стороннее API предоставленное образовательной платформой);
+* сохранение понравившихся фильмов для каждого пользователя;
+* сортировку по признаку "короткометражки";
+* регистрацию;
+* аутентификацию;
+* фвторизацию.
 
-## Available Scripts
+## *Используемые технологии:*
 
-In the project directory, you can run:
+* React.js;
+* JS;
+* HTML5;
+* CSS3.
+---
+## *Планы по доработке:*
+*
 
-### `npm start`
+---
+## *Директории:*
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+`/components` — папка с фунциональными компонентами;
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+`/context` — папка с контекстом;
 
-### `npm test`
+`/hooks` — папка с кастомными хуками;
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+`/images` — папка c изображениями.
 
-### `npm run build`
+`/vendor` — папка с кодом сторонних разработчиков;
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+`/utils` — папка с файлами, требуемыми для работы сервиса.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
+## *Запуск проекта:*
+`npm сi` — установка зависимостей;
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+`npm run start` — запускает приложение.
 
-### `npm run eject`
+---
+## *Адрес веб-приложения:*
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+* Ссылка на индивидульный [макет](https://disk.yandex.ru/d/WGfIKffnO0lZHQ), по которому верстался проект.
