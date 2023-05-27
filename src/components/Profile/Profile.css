@@ -157,7 +157,11 @@
   }
 
   .profile__title {
-    margin-top: calc(236px - (768px - 100vw) / 448 * (236 - 70));
+    margin-top: calc(236px - (768px - 100vw) / 448 * (236 - 68));
+  }
+
+  .profile__labels-container {
+    margin-top: calc(96px - (768px - 100vw) / 448 * (96 - 81));
   }
 
   .profile__button-container {
@@ -184,10 +188,14 @@
     max-width: 260px;
   }
   .profile__title {
-    margin-top: 70px;
+    margin-top: 68px;
   }
 
   .profile__labels-container {
+    margin-top: 81px;
+  }
+
+  .profile__button-container {
     margin-bottom: 40px;
   }
 
