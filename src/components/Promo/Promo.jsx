@@ -1,9 +1,19 @@
 import "./Promo.css";
 import React from "react";
-import { Link } from "react-router-dom";
+import { HashLink } from 'react-router-hash-link';
 
 function Promo() {
-  const links = ["О проекте", "Технологии", "Студент"];
+  const links = [{
+    title: "О проекте",
+    link: "/#about-project"
+  }, {
+    title: "Технологии",
+    link: "/#techs"
+  }, {
+    title: "Студент",
+    link: "/#about-me"
+  }];
+
   return (
     <section className="promo">
       <h1 className="promo__title">
@@ -14,9 +24,9 @@ function Promo() {
           {links.map((item, i) => {
             return (
               <li key={i}>
-                <Link to="signup" className="promo__link">
-                  {item}
-                </Link>
+                <HashLink to={item.link} smooth className="promo__link">
+                  {item.title}
+                </HashLink>
               </li>
             );
           })}
