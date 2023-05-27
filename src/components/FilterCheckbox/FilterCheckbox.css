@@ -25,7 +25,9 @@
     background-color: var(--tumbler-grey);
     border-radius: 10px;
     width: 36px;
-    height: 20px;
+    height: 19px;
+    left: 9px;
+    top: 1px;
   }
   
   .filter__checkbox:focus {
@@ -38,29 +40,29 @@
     font-weight: 400;
     font-size: 12px;
     line-height: 18;
-    right: 16px;
     height: inherit;
     bottom: 97px;
-    left: 48px;
+    left: 57px;
   }
   
   .filter__tumbler {
     position: absolute;
     background-color: var(--leight-grey);
-    width: 16px;
-    height: 16px;
+    width: 14px;
+    height: 14px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, .08);
     border-radius: 10px;
     border: 2px var(--dark-grey) solid;
-    left: 2px;
+    left: 9px;
+    top: 2px;
     z-index: 1;
     transition: all .3s ease;
   }
   
   .filter__checkbox:checked + .filter__tumbler {
-    left: 18px;
+    left: 26px;
     background-color: var(--light-green);
-    border: 2px var(--white-text) solid;
+    border: 1px var(--white-text) solid;
   }
   
   .filter__checkbox:checked::after {

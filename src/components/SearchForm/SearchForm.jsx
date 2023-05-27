@@ -14,16 +14,16 @@ function SearchForm({ shortMovies, handleShortMovies }) {
   };
 
   return (
-    <section className="form-movies">
-      <form name="movies" onSubmit={handleSubmit} className="form-movies__form">
+    <section className="search-form">
+      <form name="movies" onSubmit={handleSubmit} className="search-form__form">
         <input
           type="text"
-          className="form-movies__input"
+          className="search-form__input"
           value={query}
           onChange={handleChange}
           placeholder="Фильм"
         />
-        <button type="submit" className="form-movies__submit-btn">
+        <button type="submit" className="search-form__submit-btn">
           Найти
         </button>
         <FilterCheckbox

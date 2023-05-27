@@ -14,8 +14,8 @@
   text-decoration: none;
   color: var(--white-text);
   font-weight: 500;
-  font-size: 12px;
-  line-height: 16px;
+  font-size: 14px;
+  line-height: 18px;
 }
 
 .navigation__link_type_signin {
@@ -44,16 +44,16 @@
 }
 
 .navigation__burger-btn_icon {
-  width: 22px;
-  height: 2.5px;
+  width: 28px;
+  height: 3px;
   background-color: var(--white-text);
   display: block;
 }
 
 .navigation__burger-btn_icon::before {
   content: "";
-  width: 22px;
-  height: 2.5px;
+  width: 28px;
+  height: 3px;
   background-color: var(--white-text);
   display: block;
   position: relative;
@@ -62,8 +62,8 @@
 
 .navigation__burger-btn_icon::after {
   content: "";
-  width: 22px;
-  height: 2.5px;
+  width: 28px;
+  height: 3px;
   background-color: var(--white-text);
   display: block;
   position: relative;
@@ -125,7 +125,6 @@
   font-weight: 500;
   font-size: 14px;
   line-height: 16px;
-  margin-right: 17px;
   display: flex;
   align-items: center;
   gap: 17px;
@@ -163,8 +162,8 @@
 
 @media screen and (max-width: 1280px) {
   .navigation__link {
-    font-size: calc(12px - (1280px - 100vw) / 512 * (12 - 18));
-    line-height: calc(16px - (1280px - 100vw) / 512 * (16 - 22));
+    font-size: calc(14px - (1280px - 100vw) / 512 * (14 - 12));
+    line-height: calc(18px - (1280px - 100vw) / 512 * (18 - 22));
   }
 
   .navigation__link_type_signin {
@@ -238,7 +237,6 @@
   }
 
   .navigation__link_type_account {
-    margin-right: 0;
     margin-top: calc(100vh - 352px);
     font-size: 14px;
     line-height: 16px;
@@ -261,9 +259,22 @@
   }
 
   .navigation__burger-btn {
-    display: block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: calc(44px - (768px - 100vw) / 448 * (44 - 40));
     height: calc(44px - (768px - 100vw) / 448 * (44 - 43));
     margin-right: calc(30px - (768px - 100vw) / 448 * (30 - 14));
+  }
+  .navigation__burger-btn_icon {
+    width: calc(28px - (768px - 100vw) / 448 * (28 - 24));
+  }
+  
+  .navigation__burger-btn_icon::before {
+    width: calc(28px - (768px - 100vw) / 448 * (28 - 24));
+  }
+  
+  .navigation__burger-btn_icon::after {
+    width: calc(28px - (768px - 100vw) / 448 * (28 - 24));
   }
 }
