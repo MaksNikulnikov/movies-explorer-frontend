@@ -25,8 +25,11 @@ function Portfolio() {
             <li className="portfolio__list-item" key={i}>
               <div className="portfolio__list-item_container">
                 <span className="portfolio__list-item_title">{item.title}</span>
-                <a href={item.link} className="portfolio__list-item_link">
-                ↗
+                <a href={item.link} 
+                target="_blank" 
+                className="portfolio__list-item_link"
+                rel="noreferrer">
+                  ↗
                 </a>
               </div>
             </li>

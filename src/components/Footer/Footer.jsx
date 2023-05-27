@@ -15,16 +15,18 @@ function Footer() {
         }`}</p>
         <div className="footer__link-container">
           <a
-            rel="stylesheet"
+            rel="stylesheet noreferrer"
             href="https://practicum.yandex.ru/"
             className="footer__link"
+            target="_blank"
           >
             Яндекс.Практикум
           </a>
           <a
-            rel="stylesheet"
+            rel="stylesheet noreferrer"
             href="https://github.com/MaksNikulnikov/movies-explorer-frontend"
             className="footer__link"
+            target="_blank"
           >
             Github
           </a>
