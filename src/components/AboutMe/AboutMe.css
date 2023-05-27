@@ -4,7 +4,7 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: start;
+  justify-content: flex-start;
   color: var(--white-text);
 }
 
@@ -30,8 +30,8 @@
 .about-me__text-container {
   display: flex;
   flex-direction: column;
-  justify-content: start;
-  align-items: start;
+  justify-content: flex-start;
+  align-items: flex-start;
 }
 
 .about-me__name {
@@ -177,7 +177,7 @@
 @media screen and (max-width: 600px) {
   .about-me__container {
     flex-direction: column-reverse;
-    justify-content: start;
+    justify-content: flex-start;
   }
 
   .about-me__text {

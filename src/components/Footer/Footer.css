@@ -67,7 +67,7 @@
   .footer__container {
     flex-direction: column-reverse;
     min-height: 137px;
-    justify-content: end;
+    justify-content: flex-end;
     max-width: calc(482px - (500px - 100vw) / 180 * (482 - 300));
   }
 

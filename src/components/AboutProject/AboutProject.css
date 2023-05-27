@@ -5,7 +5,7 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: start;
+  justify-content: flex-start;
 }
 
 .about-project__title {
@@ -21,7 +21,7 @@
   margin-top: 23px;
   display: flex;
   flex-direction: column;
-  justify-content: start;
+  justify-content: flex-start;
   border-top: 1px var(--light-grey-line) solid;
 }
 
