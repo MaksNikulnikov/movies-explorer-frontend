@@ -40,6 +40,7 @@
   background: none;
   border: none;
   cursor: pointer;
+  display: none;
 }
 
 .navigation__burger-btn_icon {
@@ -140,11 +141,6 @@
   background-repeat: no-repeat;
 }
 
-.navigation_state_disabled {
-  transform: translateX(160%);
-  opacity: 0;
-}
-
 .navigation__link_type_movies {
   font-weight: 500;
   font-size: 14px;
@@ -173,7 +169,7 @@
 
   .navigation__link_type_signin {
     margin: 0 calc(70px - (1280px - 100vw) / 512 * (70 - 30)) 0 30px;
-  }
+  } 
 }
 
 @media screen and (max-width: 768px) {
@@ -258,8 +254,14 @@
   .navigation__link_type_register {
     font-size: calc(12px - (768px - 100vw) / 448 * (12 - 10));
   }
+  
+  .navigation_state_disabled {
+    transform: translateX(160%);
+    opacity: 0;
+  }
 
   .navigation__burger-btn {
+    display: block;
     width: calc(44px - (768px - 100vw) / 448 * (44 - 40));
     height: calc(44px - (768px - 100vw) / 448 * (44 - 43));
     margin-right: calc(30px - (768px - 100vw) / 448 * (30 - 14));

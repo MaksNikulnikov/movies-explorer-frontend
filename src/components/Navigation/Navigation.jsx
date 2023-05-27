@@ -34,7 +34,7 @@ function Navigation({ isMenuActive, onClickBurgerBtn }) {
         <>
           <button
             className={`navigation__burger-btn ${
-              isMenuActive ? "" : "navigation__burger-btn_state_disabled"
+              isMenuActive ? "navigation__burger-btn_state_disabled" : ""
             }`}
             type="button"
             onClick={handleOnClickBurger}
@@ -44,7 +44,7 @@ function Navigation({ isMenuActive, onClickBurgerBtn }) {
 
           <nav
             className={`navigation ${
-              isMenuActive ? "navigation_state_disabled" : ""
+              !isMenuActive ? "navigation_state_disabled" : ""
             }`}
           >
             <button

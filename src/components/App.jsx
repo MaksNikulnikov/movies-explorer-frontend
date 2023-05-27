@@ -14,7 +14,7 @@ import Profile from "./Profile/Profile";
 
 function App() {
   const navigate = useNavigate();
-  const [isMenuActive, setIsMenuActive] = React.useState(false);
+  const [isMenuActive, setIsMenuActive] = React.useState(true);
   const [currentUser, setCurrentUser] = React.useState({});
   const [isLoading, setIsLoading] = React.useState(false);
   const [movies, setMovies] = React.useState([]);
