@@ -1,0 +1,100 @@
+.movie-card-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 1140px;
+  width: 100%;
+}
+
+.movie-card-list__container {
+  margin: 0;
+  margin-top: 74px;
+  margin-bottom: 15px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 360px);
+  column-gap: 30px;
+  row-gap: 32px;
+  width: 100%;
+  justify-content: center;
+  list-style: none;
+  padding: 0;
+}
+
+.movie-card-list__container_type_saved-movies {
+  margin-bottom: 230px;
+}
+
+.movie-card-list__button {
+  color: var(--white-text);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 15px;
+  text-align: center;
+  margin: 50px 0 80px 0;
+  background: none;
+  border: 1px var(--light-grey) solid;
+  border-radius: 10px;
+  max-width: 320px;
+  width: 100%;
+  min-height: 36px;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 1280px) {
+  .movie-card-list {
+    max-width: calc(1140px - (1280px - 100vw) / 512 * (1140 - 708));
+  }
+
+  .movie-card-list__container {
+    margin-bottom: calc(15px - (1280px - 100vw) / 512 * (15 - 30));
+    grid-template-columns: repeat(
+      auto-fit,
+      calc(360px - (1280px - 100vw) / 512 * (360 - 342))
+    );
+    column-gap: calc(30px - (1280px - 100vw) / 512 * (30 - 24));
+    row-gap: calc(32px - (1280px - 100vw) / 512 * (32 - 35));
+  }
+
+  .movie-card-list__container_type_saved-movies {
+    margin-bottom: calc(230px - (1280px - 100vw) / 512 * (230 - 170));
+  }
+}
+@media screen and (max-width: 768px) {
+  .movie-card-list {
+    max-width: calc(708px - (768px - 100vw) / 448 * (708 - 300));
+  }
+
+  .movie-card-list__container {
+    margin-top: calc(50px - (768px - 100vw) / 448 * (80 - 50));
+    margin-bottom: 30px;
+    grid-template-columns: repeat(
+      auto-fit,
+      calc(342px - (768px - 100vw) / 448 * (342 - 300))
+    );
+    column-gap: 24px;
+    row-gap: calc(35px - (768px - 100vw) / 448 * (35 - 15));
+  }
+  .movie-card-list__container_type_saved-movies {
+    margin-bottom: 170px;
+  }
+
+  .movie-card-list__button {
+    max-width: calc(320px - (768px - 100vw) / 448 * (320 - 240));
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .movie-card-list {
+    max-width: 300px;
+  }
+
+  .movie-card-list__container {
+    margin-top: 50px;
+    grid-template-columns: repeat(auto-fit, 300px);
+    row-gap: 15px;
+  }
+
+  .movie-card-list__button {
+    max-width: 240px;
+  }
+}

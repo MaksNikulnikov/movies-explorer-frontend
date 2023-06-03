@@ -1,0 +1,174 @@
+.about-project {
+  color: var(--white-text);
+  min-height: 608px;
+  max-width: 1140px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.about-project__title {
+  margin-top: 110px;
+  margin-bottom: 0;
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 27px;
+  letter-spacing: -1px;
+}
+
+.about-project__container {
+  margin-top: 23px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  border-top: 1px var(--light-grey-line) solid;
+}
+
+.about-project__text-container {
+  margin-top: 70px;
+  padding: 0;
+  margin-bottom: 0;
+  display: flex;
+  min-height: 200px;
+  gap: 40px;
+}
+
+.about-project__text-item {
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+  min-width: 550px;
+  width: 100%;
+}
+.about-project__text-item_title {
+  margin: 0;
+  text-align: left;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: -0.04em;
+}
+
+.about-project__text-item_text {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 18px;
+  text-align: left;
+}
+
+.about-project__table {
+  min-height: 72px;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 228px auto;
+}
+
+.about-project__table_data {
+  font-size: 14px;
+  font-weight: 400;
+  min-height: 36px;
+  line-height: 17px;
+  text-align: center;
+  color: var(--light-grey-text);
+  display: block;
+  padding-top: 9px;
+  box-sizing: border-box;
+}
+
+.about-project__table_data:nth-of-type(1) {
+  color: var(--black-text);
+  background-color: var(--light-green);
+}
+
+.about-project__table_data:nth-of-type(2) {
+  color: var(--white-text);
+  background-color: var(--light-grey);
+}
+
+@media screen and (max-width: 1280px) {
+ 
+  .about-project {
+    min-height: calc(608px - (1280px - 100vw) / 512 * (608 - 585));
+    max-width: calc(1140px - (1280px - 100vw) / 512 * (1140 - 668));
+  }
+  
+  .about-project__title {
+    margin-top: calc(110px - (1280px - 100vw) / 512 * (110 - 90));
+  }
+  
+  .about-project__text-container {
+    min-height: calc(200px - (1280px - 100vw) / 512 * (200 - 220));
+    gap: calc(40px - (1280px - 100vw) / 512 * (40 - 30));
+  }
+  
+  .about-project__text-item {
+    gap: calc(26px - (1280px - 100vw) / 512 * (26 - 22));
+    min-width: calc(550px - (1280px - 100vw) / 512 * (550 - 319));
+  }
+  
+  .about-project__text-item_text {
+    font-size: calc(14px - (1280px - 100vw) / 512 * (14 - 12));
+    line-height: calc(20px - (1280px - 100vw) / 512 * (20 - 18));
+  }
+  
+  .about-project__table {
+    grid-template-columns: calc(228px - (1280px - 100vw) / 512 * (228 - 140)) auto;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .about-project {
+    min-height: calc(585px - (768px - 100vw) / 448 * (585 - 641));
+    max-width: calc(668px - (768px - 100vw) / 448 * (668 - 284));
+  }
+
+  .about-project__title {
+    margin-top: calc(90px - (768px - 100vw) / 448 * (90 - 70));
+    font-size: calc(22px - (768px - 100vw) / 448 * (22 - 18));
+    line-height: calc(27px - (768px - 100vw) / 448 * (27 - 22));
+  }
+
+  .about-project__container {
+    margin-top: calc(23px - (768px - 100vw) / 448 * (23 - 26));
+  }
+
+  .about-project__text-container {
+    min-height: calc(220px - (768px - 100vw) / 448 * (220 - 330));
+    gap: calc(30px - (768px - 100vw) / 448 * (30 - 56));
+    margin-top: calc(67px - (768px - 100vw) / 448 * (67 - 61));
+  }
+
+  .about-project__text-item {
+    gap: calc(22px - (768px - 100vw) / 448 * (22 - 16));
+    min-width: auto;
+    width: 100%;
+  }
+
+  .about-project__text-item_title {
+    font-size: calc(20px - (768px - 100vw) / 448 * (20 - 18));
+    line-height: calc(24px - (768px - 100vw) / 448 * (24 - 22));
+  }
+
+  .about-project__text-item_text {
+    font-size: calc(12px - (768px - 100vw) / 448 * (12 - 11));
+    line-height: calc(18px - (768px - 100vw) / 448 * (18 - 16));
+  }
+
+  .about-project__table {
+    grid-template-columns: calc(140px - (768px - 100vw) / 448 * (140 - 100)) auto;
+  }
+
+  .about-project__table_data {
+    font-size: calc(12px - (768px - 100vw) / 448 * (14 - 11));
+    min-height: calc(36px - (768px - 100vw) / 448 * (36 - 35));
+    line-height: calc(17px - (768px - 100vw) / 448 * (17 - 13.5));
+    padding-top: calc(9px - (768px - 100vw) / 448 * (9 - 11));
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .about-project__text-container {
+    flex-direction: column;}
+}
