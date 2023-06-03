@@ -29,6 +29,14 @@ function App() {
     navigate(-1);
   };
 
+  const handleSearchSubmit = () => {
+    movieApi.getMovies().then((movieList) => {
+      setMovies(
+        preProcessMovies(movieList)
+      );
+    });
+  }
+
   React.useEffect(() => {
     movieApi.getMovies().then((movieList) => {
       setMovies(
@@ -59,6 +67,7 @@ function App() {
               path="/movies"
               element={
                 <Movies
+                  handleSearchSubmit={handleSearchSubmit}
                   movies={movies}
                   isMenuActive={isMenuActive}
                   onClickBurgerBtn={handleBurgerBtnClick}
