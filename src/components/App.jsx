@@ -11,6 +11,7 @@ import Login from "./Login/Login";
 import Register from "./Register/Register";
 import NotFound from "./NotFound/NotFound";
 import Profile from "./Profile/Profile";
+import { preProcessMovies } from "../utils/utils";
 
 function App() {
   const navigate = useNavigate();
@@ -29,8 +30,12 @@ function App() {
   };
 
   React.useEffect(() => {
-    setMovies(movieApi.getMovies());
-  }, [movies]);
+    movieApi.getMovies().then((movieList) => {
+      setMovies(
+        preProcessMovies(movieList)
+      );
+    });
+  }, []);
 
   React.useEffect(() => {
     setSavedMovies(movieApi.getSavedMovies());

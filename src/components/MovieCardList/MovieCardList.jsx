@@ -5,6 +5,7 @@ import "./MovieCardList.css";
 import React from "react";
 import { LAPTOP_WIDTH, TABLET_WIDTH } from "../../utils/constants";
 import { LAPTOP_AMOUNT_OF_VIDEOS, PHONE_AMOUNT_OF_VIDEOS, TABLET_AMOUNT_OF_VIDEOS } from "../../utils/config";
+import { formatDate } from "../../utils/utils";
 
 function MovieCardList({ movies }) {
   const location = useLocation();
@@ -43,10 +44,10 @@ function MovieCardList({ movies }) {
           .slice(0, getAmountOfMovies())
           .map((item) => {
             return (
-              <li key={item._id}>
+              <li key={item.id}>
                 <MovieCard
-                  title={item.title}
-                  duration={item.duration}
+                  title={item.nameEN}
+                  duration={`Длительность: ${formatDate(item.duration)}`}
                   thumbnail={item.thumbnail}
                   isSaved={item.isSaved}
                 />

@@ -1,8 +1,20 @@
-import { falseMovies } from "./constants";
+import { MOVIES_API_URL, falseMovies } from "./constants";
 
 class MovieApi {
+  constructor({apiURL}){
+    this._apiURL = apiURL;
+  }
+
+  async _requestResult(res) {
+    const result = await res.json();
+    return res.ok ? result : Promise.reject(res);
+  }
+
   getMovies = () => {
-    return falseMovies;
+    return fetch(`${this._apiURL}`, {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' },
+    }).then((res) => this._requestResult(res));
   };
 
   getSavedMovies = () => {
@@ -10,6 +22,6 @@ class MovieApi {
   };
 }
 
-const movieApi = new MovieApi();
+const movieApi = new MovieApi({apiURL:MOVIES_API_URL});
 
 export default movieApi;

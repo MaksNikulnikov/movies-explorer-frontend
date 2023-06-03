@@ -8,7 +8,6 @@ import MovieCardList from "../MovieCardList/MovieCardList";
 
 function Movies({movies, isMenuActive, onClickBurgerBtn}) {
   const [shortMovies, setShortMovies] = React.useState(false);
-
   function handleShortMovies() {
     setShortMovies(!shortMovies);
 }
