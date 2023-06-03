@@ -13,24 +13,48 @@ function MovieCardList({ movies }) {
   const [screenWidth, setScreenWidth] = useState(
     document.documentElement.clientWidth
   );
+  const [counterMore, setCounterMore] = useState(0);
+  const [isAllMoviesDisplayed, setIsAllMoviesDisplayed] = useState(true);
+
+  const handleMore = () => {
+    const newCounter = counterMore + 1;
+    setCounterMore(newCounter);
+    checkIsAllMoviesDisplayed(newCounter);
+  }
+
+  const checkIsAllMoviesDisplayed = (newCounter) => {
+    const amountOfMovies = getAmountOfMovies(newCounter);
+    if (amountOfMovies === movies.length) {
+      setIsAllMoviesDisplayed(true);
+    } else {
+      setIsAllMoviesDisplayed(false);
+    }
+  }
 
   const handleResizeWidth = useCallback(() => {
     setScreenWidth(document.documentElement.clientWidth);
-  }, [setScreenWidth]);
+    checkIsAllMoviesDisplayed();
+  }, [setScreenWidth, checkIsAllMoviesDisplayed]);
 
-  const getAmountOfMovies = () => {
+  const getAmountOfMovies = (count = counterMore) => {
+    let result = 0;
     if (screenWidth <= TABLET_WIDTH) {
-      return PHONE_AMOUNT_OF_VIDEOS
+      result = PHONE_AMOUNT_OF_VIDEOS + 1 * count;
     } else if (screenWidth < LAPTOP_WIDTH) {
-      return TABLET_AMOUNT_OF_VIDEOS
+      result = TABLET_AMOUNT_OF_VIDEOS + 2 * count;
     } else {
-      return LAPTOP_AMOUNT_OF_VIDEOS
+      result = LAPTOP_AMOUNT_OF_VIDEOS + 3 * count;
     }
+    return result >= movies.length ? movies.length : result;
   }
 
   useEffect(() => {
     window.addEventListener('resize', handleResizeWidth);
   }, [handleResizeWidth]);
+
+  useEffect(() => {
+    checkIsAllMoviesDisplayed();
+  }, [isAllMoviesDisplayed])
 
   return (
     <section className="movie-card-list">
@@ -55,11 +79,13 @@ function MovieCardList({ movies }) {
             );
           })}
       </ul>
-      {location.pathname === "/movies" ? (
-        <button className="movie-card-list__button">Ещё</button>
-      ) : (
-        <></>
-      )}
+      {location.pathname === "/movies" &&
+        !isAllMoviesDisplayed &&
+        <button
+          className="movie-card-list__button"
+          onClick={handleMore}
+        >Ещё</button>
+      }
     </section>
   );
 }

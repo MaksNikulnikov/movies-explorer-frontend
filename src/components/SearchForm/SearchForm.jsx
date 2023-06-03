@@ -1,10 +1,10 @@
 import "./SearchForm.css";
 import React from "react";
 import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
-import useFormValidation from '../../hooks/useFormValidation';
 
-function SearchForm({ shortMovies, handleShortMovies, handleSearchSubmit }) {
-  const { values, handleChange, isValid, setIsValid } = useFormValidation();
+
+function SearchForm({ shortMovies, handleShortMovies, handleSearchSubmit, formValidation }) {
+  const { values, handleChange, isValid, setIsValid } = formValidation;
   const [errorQuery, setErrorQuery] = React.useState('');
 
   function handleSubmit(e) {
@@ -12,8 +12,7 @@ function SearchForm({ shortMovies, handleShortMovies, handleSearchSubmit }) {
     if (!isValid) {
       setErrorQuery('Нужно ввести ключевое слово.');
     } else {
-      handleSearchSubmit();
-      values.query = "";
+      handleSearchSubmit(values.query);
     }
   };
 
