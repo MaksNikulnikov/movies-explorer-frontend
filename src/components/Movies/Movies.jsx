@@ -13,8 +13,7 @@ import Preloader from "../Preloader/Preloader";
 
 function Movies({ handleSaveMovie, savedMovies, isMenuActive, onClickBurgerBtn }) {
   const currentUser = useContext(CurrentUserContext);
-  currentUser.email = 'test3';
-  
+
   const initialState = {
     isShortMovieOn: false,
     moviesToRender: {},
@@ -39,14 +38,17 @@ function Movies({ handleSaveMovie, savedMovies, isMenuActive, onClickBurgerBtn }
           const newState = {
             ...state,
             status: "hasMoviesToRender",
-            moviesToRender: preProcessMovies(movieList,savedMovies),
+            moviesToRender: preProcessMovies(movieList, savedMovies),
             currentQuery: query,
           }
           setState(newState);
-          delete newState.status;
           localStorage.setItem(
             currentUser.email,
-            JSON.stringify(newState)
+            JSON.stringify({
+              isShortMovieOn: newState.isShortMovieOn,
+              moviesToRender: newState.moviesToRender,
+              currentQuery: newState.currentQuery,
+            })
           );
         } else {
           setState({
@@ -75,6 +77,11 @@ function Movies({ handleSaveMovie, savedMovies, isMenuActive, onClickBurgerBtn }
       restoredData.status = "hasMoviesToRender";
       setState(restoredData);
       formValidation.values.query = restoredData.currentQuery;
+    } else {
+      setState({
+        ...state,
+        status: "initial",
+      })
     }
   }, [currentUser]);
 

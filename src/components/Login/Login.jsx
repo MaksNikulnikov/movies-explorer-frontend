@@ -4,12 +4,13 @@ import { Link } from "react-router-dom";
 import logo from "../../images/logo.svg";
 import useFormValidation from "../../hooks/useFormValidation";
 
-export default function Login() {
+export default function Login({handleLogin}) {
   const { values, handleChange, resetForm, errors, isValid } =
     useFormValidation();
 
   function handleSubmit(e) {
     e.preventDefault();
+    handleLogin(values);
     resetForm();
   }
 

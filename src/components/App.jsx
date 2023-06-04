@@ -19,6 +19,7 @@ function App() {
   const [currentUser, setCurrentUser] = React.useState({});
   const [isLoading, setIsLoading] = React.useState(false);
   const [savedMovies, setSavedMovies] = React.useState([]);
+  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
 
   const handleBurgerBtnClick = () => {
     setIsMenuActive(!isMenuActive);
@@ -35,6 +36,7 @@ function App() {
       .catch(err => {
         console.error(err);
       });
+      console.log(savedMovies)
   }
 
   function handleDeleteMovie(movie) {
@@ -49,6 +51,45 @@ function App() {
       .catch(err => { console.error(err); }
       );
   }
+
+  function handleRegister({ name, email, password }) {
+    setIsLoading(true);
+    mainApi
+      .createUser(name, email, password)
+      .then(data => {
+        if (data._id) {
+          handleLogin({ email, password });
+        }
+      })
+      .catch(err => { console.error(err); })
+      .finally(() => setIsLoading(false));
+  }
+
+  function handleLogin({ email, password }) {
+    setIsLoading(true);
+    mainApi
+      .login(email, password)
+      .then(jwt => {
+        if (jwt.token) {
+          localStorage.setItem('jwt', jwt.token);
+          setIsLoggedIn(true);
+          navigate('/movies');
+        }
+      })
+      .catch(err => { console.error(err); })
+      .finally(() => setIsLoading(false));
+  }
+
+  React.useEffect(() => {
+    if (isLoggedIn) {
+      setIsLoading(true);
+      mainApi
+        .getUserInfo()
+        .then(res => setCurrentUser(res))
+        .catch(err => { console.error(err); })
+        .finally(() => setIsLoading(false));
+    }
+  }, [isLoggedIn]);
 
 
   return (
@@ -87,8 +128,12 @@ function App() {
                 />
               }
             />
-            <Route path="/signin" element={<Login />} />
-            <Route path="/signup" element={<Register />} />
+            <Route 
+            path="/signin" 
+            element={<Login handleLogin={handleLogin}/>} />
+            <Route
+              path="/signup"
+              element={<Register handleRegister={handleRegister} />} />
             <Route
               path="/profile"
               element={
