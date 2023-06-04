@@ -10,6 +10,7 @@ import Login from "./Login/Login";
 import Register from "./Register/Register";
 import NotFound from "./NotFound/NotFound";
 import Profile from "./Profile/Profile";
+import mainApi from "../utils/MainApi";
 
 
 function App() {
@@ -27,9 +28,28 @@ function App() {
     navigate(-1);
   };
 
-  // React.useEffect(() => {
-  //   setSavedMovies(movieApi.getSavedMovies());
-  // }, [savedMovies]);
+  function handleSaveMovie(movie) {
+    mainApi
+      .saveMovie(movie)
+      .then(newMovie => setSavedMovies([...savedMovies, newMovie]))
+      .catch(err => {
+        console.error(err);
+      });
+  }
+
+  function handleDeleteMovie(movie) {
+    const savedMovie = savedMovies.find(
+      (item) => item.movieId === movie.id);
+    mainApi
+      .deleteMovie(savedMovie.id)
+      .then(() => {
+        const newMovies = savedMovies.filter(m => movie.id !== m.movieId);
+        setSavedMovies(newMovies);
+      })
+      .catch(err => { console.error(err); }
+      );
+  }
+
 
   return (
     <>
@@ -49,6 +69,8 @@ function App() {
               path="/movies"
               element={
                 <Movies
+                  handleSaveMovie={handleSaveMovie}
+                  savedMovies={savedMovies}
                   isMenuActive={isMenuActive}
                   onClickBurgerBtn={handleBurgerBtnClick}
                 />
@@ -58,7 +80,8 @@ function App() {
               path="/saved-movies"
               element={
                 <SavedMovies
-                  movies={savedMovies}
+                  handleDeleteMovie={handleDeleteMovie}
+                  savedMovies={savedMovies}
                   isMenuActive={isMenuActive}
                   onClickBurgerBtn={handleBurgerBtnClick}
                 />

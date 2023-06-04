@@ -5,9 +5,8 @@ import "./MovieCardList.css";
 import React from "react";
 import { LAPTOP_WIDTH, TABLET_WIDTH } from "../../utils/constants";
 import { LAPTOP_AMOUNT_OF_VIDEOS, PHONE_AMOUNT_OF_VIDEOS, TABLET_AMOUNT_OF_VIDEOS } from "../../utils/config";
-import { formatDate } from "../../utils/utils";
 
-function MovieCardList({ movies }) {
+function MovieCardList({ handleButton, movies }) {
   const location = useLocation();
 
   const [screenWidth, setScreenWidth] = useState(
@@ -70,10 +69,8 @@ function MovieCardList({ movies }) {
             return (
               <li key={item.id}>
                 <MovieCard
-                  title={item.nameEN}
-                  duration={`Длительность: ${formatDate(item.duration)}`}
-                  thumbnail={item.thumbnail}
-                  isSaved={item.isSaved}
+                  handleButton={handleButton}
+                  data={item}
                 />
               </li>
             );

@@ -57,7 +57,7 @@ class Api {
     }).then(res => this._requestResult(res));
   }
 
-  addNewMovie(data) {
+  saveMovie(data) {
     return fetch(`${this._baseUrl}/movies`, {
       method: 'POST',
       headers: {

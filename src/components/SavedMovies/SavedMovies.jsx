@@ -5,13 +5,20 @@ import Navigation from "../Navigation/Navigation";
 import Footer from "../Footer/Footer";
 import SearchForm from "../SearchForm/SearchForm";
 import MovieCardList from "../MovieCardList/MovieCardList";
+import useFormValidation from "../../hooks/useFormValidation";
 
-function SavedMovies({movies, isMenuActive, onClickBurgerBtn}) {
+function SavedMovies({ savedMovies, handleDeleteMovie, isMenuActive, onClickBurgerBtn }) {
   const [shortMovies, setShortMovies] = React.useState(false);
 
-  function handleShortMovies() {
+  const formValidation = useFormValidation();
+
+  const handleShortMovies = () => {
     setShortMovies(!shortMovies);
-}
+  }
+
+  const handleSearchSubmit = (querry) => {
+
+  }
 
   return (
     <>
@@ -22,8 +29,15 @@ function SavedMovies({movies, isMenuActive, onClickBurgerBtn}) {
         />
       </Header>
       <main className="saved-movies">
-        <SearchForm handleShortMovies={handleShortMovies} shortMovies={shortMovies}/>
-        <MovieCardList movies={movies}/>
+        <SearchForm
+          formValidation={formValidation}
+          handleShortMovies={handleShortMovies}
+          shortMovies={shortMovies}
+          handleSearchSubmit={handleSearchSubmit}
+        />
+        <MovieCardList
+          movies={savedMovies}
+          handleButton={handleDeleteMovie} />
       </main>
       <Footer />
     </>
