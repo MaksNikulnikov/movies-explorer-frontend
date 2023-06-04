@@ -95,6 +95,7 @@ const TABLET_WIDTH = 768;
 const PHONE_WIDTH = 320;
 
 const MOVIES_API_URL = "https://api.nomoreparties.co/beatfilm-movies";
+const MAIN_API_URL = "https://api.portfolio.nomoredomains.monster";
 
 export {
   falseMovies,
@@ -102,4 +103,5 @@ export {
   TABLET_WIDTH,
   PHONE_WIDTH,
   MOVIES_API_URL,
+  MAIN_API_URL,
 };
