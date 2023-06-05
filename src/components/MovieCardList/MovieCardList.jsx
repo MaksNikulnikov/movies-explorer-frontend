@@ -6,7 +6,7 @@ import React from "react";
 import { LAPTOP_WIDTH, TABLET_WIDTH } from "../../utils/constants";
 import { LAPTOP_AMOUNT_OF_VIDEOS, PHONE_AMOUNT_OF_VIDEOS, TABLET_AMOUNT_OF_VIDEOS } from "../../utils/config";
 
-function MovieCardList({ handleButton, movies }) {
+function MovieCardList({ handleButton, movies, savedMovies }) {
   const location = useLocation();
 
   const [screenWidth, setScreenWidth] = useState(
@@ -47,6 +47,10 @@ function MovieCardList({ handleButton, movies }) {
     return result >= movies.length ? movies.length : result;
   }
 
+  const checkIfSaved = (movie) => {
+    return savedMovies.find((savedMovie) => savedMovie.movieId === movie.id);
+  }
+
   useEffect(() => {
     window.addEventListener('resize', handleResizeWidth);
   }, [handleResizeWidth]);
@@ -65,10 +69,11 @@ function MovieCardList({ handleButton, movies }) {
       >
         {movies
           .slice(0, getAmountOfMovies())
-          .map((item) => {
+          .map((item, i) => {
             return (
-              <li key={item.id}>
+              <li key={i}>
                 <MovieCard
+                  isSaved={checkIfSaved(item)}
                   handleButton={handleButton}
                   data={item}
                 />

@@ -3,9 +3,8 @@ import "./MovieCard.css";
 import React from "react";
 import { formatDate } from "../../utils/utils";
 
-function MovieCard({ handleButton, data }) {
+function MovieCard({ handleButton, data, isSaved }) {
   const location = useLocation();
-  const isSaved = data.isSaved || false;
 
   const handleOnClick = ()=>{
     handleButton(data);

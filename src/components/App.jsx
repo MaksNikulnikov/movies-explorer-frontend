@@ -30,26 +30,42 @@ function App() {
   };
 
   function handleSaveMovie(movie) {
+    setIsLoading(true);
     mainApi
       .saveMovie(movie)
-      .then(newMovie => setSavedMovies([...savedMovies, newMovie]))
+      .then(newMovie => {
+        if (!savedMovies.find(item => {
+          return item.movieId === newMovie.movieId
+        })) {
+          const newSavedMovies = [...savedMovies, newMovie];
+          setSavedMovies(newSavedMovies);
+          localStorage.setItem(
+            `${currentUser.email}-savedMovies`,
+            JSON.stringify(newSavedMovies));
+        }
+      })
       .catch(err => {
         console.error(err);
-      });
-      console.log(savedMovies)
+      })
+      .finally(() => setIsLoading(false));;
   }
 
-  function handleDeleteMovie(movie) {
+  function handleDeleteMovie(deletedSavedMovie) {
+    setIsLoading(true);
     const savedMovie = savedMovies.find(
-      (item) => item.movieId === movie.id);
+      (savedMovie) => savedMovie.movieId === deletedSavedMovie.movieId);
     mainApi
-      .deleteMovie(savedMovie.id)
+      .deleteMovie(savedMovie._id)
       .then(() => {
-        const newMovies = savedMovies.filter(m => movie.id !== m.movieId);
-        setSavedMovies(newMovies);
+        const newSavedMovies = savedMovies.filter(savedMovie => deletedSavedMovie.movieId !== savedMovie.movieId);
+        setSavedMovies(newSavedMovies);
+        localStorage.setItem(
+          `${currentUser.email}-savedMovies`,
+          JSON.stringify(newSavedMovies));
       })
       .catch(err => { console.error(err); }
-      );
+      )
+      .finally(() => setIsLoading(false));;
   }
 
   function handleRegister({ name, email, password }) {
@@ -85,11 +101,40 @@ function App() {
       setIsLoading(true);
       mainApi
         .getUserInfo()
-        .then(res => setCurrentUser(res))
+        .then(res => {
+          console.log("res", res)
+          setCurrentUser(res);
+          const storedSavedMovies = localStorage.getItem(`${currentUser.email}-savedMovies`);
+          if (storedSavedMovies) {
+            setSavedMovies(JSON.parse(storedSavedMovies));
+          }
+
+        })
         .catch(err => { console.error(err); })
         .finally(() => setIsLoading(false));
     }
   }, [isLoggedIn]);
+
+  React.useEffect(() => {
+    const path = window.location.pathname;
+    const jwt = localStorage.getItem('jwt');
+    if (jwt) {
+      setIsLoading(true);
+      mainApi
+        .getUserInfo()
+        .then(data => {
+          if (data) {
+            setIsLoggedIn(true);
+            setCurrentUser(data);
+            navigate(path);
+          }
+        })
+        .catch(err => { console.error(err); })
+        .finally(() => {
+          setIsLoading(false);
+        });
+    }
+  }, []);
 
 
   return (
@@ -128,9 +173,9 @@ function App() {
                 />
               }
             />
-            <Route 
-            path="/signin" 
-            element={<Login handleLogin={handleLogin}/>} />
+            <Route
+              path="/signin"
+              element={<Login handleLogin={handleLogin} />} />
             <Route
               path="/signup"
               element={<Register handleRegister={handleRegister} />} />

@@ -38,7 +38,7 @@ function Movies({ handleSaveMovie, savedMovies, isMenuActive, onClickBurgerBtn }
           const newState = {
             ...state,
             status: "hasMoviesToRender",
-            moviesToRender: preProcessMovies(movieList, savedMovies),
+            moviesToRender: preProcessMovies(movieList),
             currentQuery: query,
           }
           setState(newState);
@@ -66,7 +66,6 @@ function Movies({ handleSaveMovie, savedMovies, isMenuActive, onClickBurgerBtn }
   }
 
   useEffect(() => {
-
     const storedData = localStorage.getItem(currentUser.email);
     setState({
       ...state,
@@ -103,7 +102,8 @@ function Movies({ handleSaveMovie, savedMovies, isMenuActive, onClickBurgerBtn }
         {
           state.status === "hasMoviesToRender" && <MovieCardList
             movies={state.moviesToRender}
-            handleButton={handleSaveMovie} />
+            handleButton={handleSaveMovie} 
+            savedMovies={savedMovies}/>
         }
         {
           state.status === "preloader" && <Preloader isOpen={true} />

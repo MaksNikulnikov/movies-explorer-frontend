@@ -37,6 +37,7 @@ function SavedMovies({ savedMovies, handleDeleteMovie, isMenuActive, onClickBurg
         />
         <MovieCardList
           movies={savedMovies}
+          savedMovies={savedMovies}
           handleButton={handleDeleteMovie} />
       </main>
       <Footer />
