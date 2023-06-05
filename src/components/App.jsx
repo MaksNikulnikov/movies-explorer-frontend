@@ -40,9 +40,9 @@ function App() {
         })) {
           const newSavedMovies = [...savedMovies, newMovie];
           setSavedMovies(newSavedMovies);
-          localStorage.setItem(
-            `${currentUser.email}-savedMovies`,
-            JSON.stringify(newSavedMovies));
+          // localStorage.setItem(
+          //   `${currentUser.email}-savedMovies`,
+          //   JSON.stringify(newSavedMovies));
         }
       })
       .catch(err => {
@@ -60,9 +60,9 @@ function App() {
       .then(() => {
         const newSavedMovies = savedMovies.filter(savedMovie => deletedSavedMovie.movieId !== savedMovie.movieId);
         setSavedMovies(newSavedMovies);
-        localStorage.setItem(
-          `${currentUser.email}-savedMovies`,
-          JSON.stringify(newSavedMovies));
+        // localStorage.setItem(
+        //   `${currentUser.email}-savedMovies`,
+        //   JSON.stringify(newSavedMovies));
       })
       .catch(err => { console.error(err); }
       )
@@ -115,22 +115,38 @@ function App() {
       .finally(() => setIsLoading(false));
   }
 
+  // React.useEffect(() => {
+  //   if (isLoggedIn) {
+  //     setIsLoading(true);
+  //     mainApi
+  //       .getUserInfo()
+  //       .then(res => {
+  //         setCurrentUser(res);
+  //         const storedSavedMovies = localStorage.getItem(`${res.email}-savedMovies`);
+  //         if (storedSavedMovies) {
+  //           setSavedMovies(JSON.parse(storedSavedMovies));
+  //         }
+  //       })
+  //       .catch(err => { console.error(err); })
+  //       .finally(() => setIsLoading(false));
+  //   }
+  // }, [isLoggedIn]);
+
   React.useEffect(() => {
-    if (isLoggedIn) {
-      setIsLoading(true);
+    setIsLoading(true);
+    if (isLoggedIn && currentUser) {
       mainApi
-        .getUserInfo()
-        .then(res => {
-          setCurrentUser(res);
-          const storedSavedMovies = localStorage.getItem(`${res.email}-savedMovies`);
-          if (storedSavedMovies) {
-            setSavedMovies(JSON.parse(storedSavedMovies));
-          }
+        .getSavedMovies()
+        .then(data => {
+          const savedMoviesList = data.filter(m => m.owner === currentUser._id);
+          setSavedMovies(savedMoviesList);
         })
         .catch(err => { console.error(err); })
-        .finally(() => setIsLoading(false));
+        .finally(() => {
+          setIsLoading(false);
+        });
     }
-  }, [isLoggedIn]);
+  }, [currentUser, isLoggedIn]);
 
   React.useEffect(() => {
     const path = window.location.pathname;
@@ -177,7 +193,7 @@ function App() {
                 savedMovies={savedMovies}
                 isMenuActive={isMenuActive}
                 onClickBurgerBtn={handleBurgerBtnClick}
-              />}/>
+              />} />
             <Route
               path='/saved-movies'
               element={<ProtectedRoute
@@ -187,23 +203,23 @@ function App() {
                 savedMovies={savedMovies}
                 isMenuActive={isMenuActive}
                 onClickBurgerBtn={handleBurgerBtnClick}
-              />}/>
+              />} />
             <Route
               path="/signin"
               element={<Login handleLogin={handleLogin} />} />
             <Route
               path="/signup"
               element={<Register handleRegister={handleRegister} />} />
-            <Route 
-            path='/profile'
-            element={<ProtectedRoute
-              component={Profile}
-              loggedIn={isLoggedIn}
-              handleProfile={handleProfile}
-              isMenuActive={isMenuActive}
-              onClickBurgerBtn={handleBurgerBtnClick}
-              handleLogout={handleLogOut}
-            />}/>
+            <Route
+              path='/profile'
+              element={<ProtectedRoute
+                component={Profile}
+                loggedIn={isLoggedIn}
+                handleProfile={handleProfile}
+                isMenuActive={isMenuActive}
+                onClickBurgerBtn={handleBurgerBtnClick}
+                handleLogout={handleLogOut}
+              />} />
             <Route path="*" element={<NotFound goBack={goBack} />} />
           </Routes>
         </div>

@@ -16,7 +16,7 @@ function Movies({ handleSaveMovie, savedMovies, isMenuActive, onClickBurgerBtn }
 
   const initialState = {
     isShortMovieOn: false,
-    moviesToRender: {},
+    moviesToRender: [],
     currentQuery: "",
     status: "initial",
   }

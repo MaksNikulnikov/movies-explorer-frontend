@@ -19,6 +19,49 @@ function SavedMovies({ savedMovies, handleDeleteMovie, isMenuActive, onClickBurg
   const handleSearchSubmit = (querry) => {
 
   }
+  // const handleSearchSubmit = (query) => {
+  //   setState({
+  //     ...state,
+  //     status: "preloader",
+  //   });
+  //   movieApi.getMovies()
+  //     .then((movieList) => {
+  //       if (movieList) {
+  //         const newMovieList = preProcessMovies(
+  //           filterMoviesByQuery(movieList, query, state.isShortMovieOn)
+  //         );
+  //         if (newMovieList.length !== 0) {
+  //           const newState = {
+  //             ...state,
+  //             status: "hasMoviesToRender",
+  //             moviesToRender: newMovieList,
+  //             currentQuery: query,
+  //           }
+  //           setState(newState);
+  //           localStorage.setItem(
+  //             currentUser.email,
+  //             JSON.stringify({
+  //               isShortMovieOn: newState.isShortMovieOn,
+  //               moviesToRender: newState.moviesToRender,
+  //               currentQuery: newState.currentQuery,
+  //             })
+  //           );
+  //         } else {
+  //           setState({
+  //             ...state,
+  //             status: "searchResultEmpty",
+  //           })
+  //         }
+  //       }
+  //     })
+  //     .catch((e) => {
+  //       console.log(e)
+  //       setState({
+  //         ...state,
+  //         status: "downloadError",
+  //       })
+  //     });
+  // }
 
   return (
     <>
