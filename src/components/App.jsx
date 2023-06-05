@@ -11,6 +11,7 @@ import Register from "./Register/Register";
 import NotFound from "./NotFound/NotFound";
 import Profile from "./Profile/Profile";
 import mainApi from "../utils/MainApi";
+import ProtectedRoute from "./ProtectedRoute/ProtectedRoute";
 
 
 function App() {
@@ -170,43 +171,40 @@ function App() {
             />
             <Route
               path="/movies"
-              element={
-                <Movies
-                  handleSaveMovie={handleSaveMovie}
-                  savedMovies={savedMovies}
-                  isMenuActive={isMenuActive}
-                  onClickBurgerBtn={handleBurgerBtnClick}
-                />
-              }
-            />
+              element={<ProtectedRoute
+                component={Movies}
+                loggedIn={isLoggedIn}
+                handleSaveMovie={handleSaveMovie}
+                savedMovies={savedMovies}
+                isMenuActive={isMenuActive}
+                onClickBurgerBtn={handleBurgerBtnClick}
+              />}/>
             <Route
-              path="/saved-movies"
-              element={
-                <SavedMovies
-                  handleDeleteMovie={handleDeleteMovie}
-                  savedMovies={savedMovies}
-                  isMenuActive={isMenuActive}
-                  onClickBurgerBtn={handleBurgerBtnClick}
-                />
-              }
-            />
+              path='/saved-movies'
+              element={<ProtectedRoute
+                component={SavedMovies}
+                loggedIn={isLoggedIn}
+                handleDeleteMovie={handleDeleteMovie}
+                savedMovies={savedMovies}
+                isMenuActive={isMenuActive}
+                onClickBurgerBtn={handleBurgerBtnClick}
+              />}/>
             <Route
               path="/signin"
               element={<Login handleLogin={handleLogin} />} />
             <Route
               path="/signup"
               element={<Register handleRegister={handleRegister} />} />
-            <Route
-              path="/profile"
-              element={
-                <Profile
-                  handleProfile={handleProfile}
-                  isMenuActive={isMenuActive}
-                  onClickBurgerBtn={handleBurgerBtnClick}
-                  handleLogout={handleLogOut} 
-                />
-              }
-            />
+            <Route 
+            path='/profile'
+            element={<ProtectedRoute
+              component={Profile}
+              loggedIn={isLoggedIn}
+              handleProfile={handleProfile}
+              isMenuActive={isMenuActive}
+              onClickBurgerBtn={handleBurgerBtnClick}
+              handleLogout={handleLogOut}
+            />}/>
             <Route path="*" element={<NotFound goBack={goBack} />} />
           </Routes>
         </div>
