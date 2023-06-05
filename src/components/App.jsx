@@ -96,13 +96,30 @@ function App() {
       .finally(() => setIsLoading(false));
   }
 
+  function handleLogOut() {
+    setCurrentUser({});
+    setIsLoggedIn(false);
+    localStorage.removeItem("jwt");
+    navigate('/');
+  }
+
+  function handleProfile({ name, email }) {
+    setIsLoading(true);
+    mainApi
+      .updateUser(name, email)
+      .then(newUserData => {
+        setCurrentUser(newUserData);
+      })
+      .catch(err => { console.error(err); })
+      .finally(() => setIsLoading(false));
+  }
+
   React.useEffect(() => {
     if (isLoggedIn) {
       setIsLoading(true);
       mainApi
         .getUserInfo()
         .then(res => {
-          console.log("res", res)
           setCurrentUser(res);
           const storedSavedMovies = localStorage.getItem(`${currentUser.email}-savedMovies`);
           if (storedSavedMovies) {
@@ -183,8 +200,10 @@ function App() {
               path="/profile"
               element={
                 <Profile
+                  handleProfile={handleProfile}
                   isMenuActive={isMenuActive}
                   onClickBurgerBtn={handleBurgerBtnClick}
+                  handleLogout={handleLogOut} 
                 />
               }
             />

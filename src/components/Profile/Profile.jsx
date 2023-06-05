@@ -1,20 +1,28 @@
 import "./Profile.css";
-import { useEffect } from "react";
+import { useEffect, useContext } from "react";
 import useFormValidation from "../../hooks/useFormValidation";
 import Header from "../Header/Header";
 import Navigation from "../Navigation/Navigation";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
-export default function Profile({ isMenuActive, onClickBurgerBtn }) {
+export default function Profile({ isMenuActive, onClickBurgerBtn, handleProfile, handleLogout}) {
+  const currentUser = useContext(CurrentUserContext);
   const { values, handleChange, resetForm, errors, isValid } =
     useFormValidation();
   function handleSubmit(e) {
     e.preventDefault();
-    // handleProfile(values);
+    handleProfile(values);
   }
 
   useEffect(() => {
     resetForm();
   }, [resetForm]);
+
+  useEffect(() => {
+    if (currentUser) {
+      resetForm(currentUser, {}, true);
+    }
+  }, [currentUser, resetForm]);
 
   return (
     <>
@@ -32,7 +40,7 @@ export default function Profile({ isMenuActive, onClickBurgerBtn }) {
           onSubmit={handleSubmit}
         >
           <div className="profile__form_main">
-            <h1 className="profile__title">{`Привет, ${values.name}!`}</h1>
+            <h1 className="profile__title">{`Привет, ${currentUser.name}!`}</h1>
             <div className="profile__labels-container">
               <label className="profile__label">
                 <span className="profile__label-text">Имя</span>
@@ -42,7 +50,7 @@ export default function Profile({ isMenuActive, onClickBurgerBtn }) {
                     errors.name && "profile__input_error"
                   }`}
                   onChange={handleChange}
-                  value={values.name || "Максим"}
+                  value={values.name||""}
                   type="text"
                   required
                   minLength="2"
@@ -58,7 +66,7 @@ export default function Profile({ isMenuActive, onClickBurgerBtn }) {
                     errors.email && "profile__input_error"
                   }`}
                   onChange={handleChange}
-                  value={values.email || "maxximn@yandex.ru"}
+                  value={values.email||""}
                   type="email"
                   required
                 />
@@ -76,7 +84,10 @@ export default function Profile({ isMenuActive, onClickBurgerBtn }) {
             >
               Редактировать
             </button>
-            <button type="button" className="profile__button-exit">
+            <button 
+            type="button" 
+            className="profile__button-exit"
+            onClick={handleLogout}>
               Выйти из аккаунта
             </button>
           </div>
