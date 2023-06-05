@@ -1,3 +1,5 @@
+import { SHORTMOVIES_DURATION } from "./constants";
+
 function formatDate(minutes) {
     const hours = Math.floor(minutes / 60);
     minutes = minutes % 60;
@@ -26,7 +28,30 @@ function preProcessMovies(movies) {
     return movies
 }
 
+function filterMoviesByDuration(movies) {
+    return movies.filter(movie => movie.duration < SHORTMOVIES_DURATION);
+  }
+  
+ 
+function filterMoviesByQuery(movies, userQuery, shortMoviesCheckbox) {
+
+    const moviesByUserQuery = movies.filter((movie) => {
+      const movieRu = String(movie.nameRU).toLowerCase().trim();
+      const movieEn = String(movie.nameEN).toLowerCase().trim();
+      const userMovie = userQuery.toLowerCase().trim();
+      return movieRu.indexOf(userMovie) !== -1 || movieEn.indexOf(userMovie) !== -1;
+    });
+  
+    if (shortMoviesCheckbox) {
+      return filterMoviesByDuration(moviesByUserQuery);
+    } else {
+      return moviesByUserQuery;
+    }
+  }
+
 export {
     formatDate,
     preProcessMovies,
+    filterMoviesByQuery,
+    filterMoviesByDuration,
 }

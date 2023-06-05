@@ -122,11 +122,10 @@ function App() {
         .getUserInfo()
         .then(res => {
           setCurrentUser(res);
-          const storedSavedMovies = localStorage.getItem(`${currentUser.email}-savedMovies`);
+          const storedSavedMovies = localStorage.getItem(`${res.email}-savedMovies`);
           if (storedSavedMovies) {
             setSavedMovies(JSON.parse(storedSavedMovies));
           }
-
         })
         .catch(err => { console.error(err); })
         .finally(() => setIsLoading(false));

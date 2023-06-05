@@ -6,7 +6,7 @@ import Footer from "../Footer/Footer";
 import SearchForm from "../SearchForm/SearchForm";
 import MovieCardList from "../MovieCardList/MovieCardList";
 import movieApi from "../../utils/MovieApi";
-import { preProcessMovies } from "../../utils/utils";
+import { filterMoviesByQuery, preProcessMovies } from "../../utils/utils";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import useFormValidation from '../../hooks/useFormValidation';
 import Preloader from "../Preloader/Preloader";
@@ -35,29 +35,35 @@ function Movies({ handleSaveMovie, savedMovies, isMenuActive, onClickBurgerBtn }
     movieApi.getMovies()
       .then((movieList) => {
         if (movieList) {
-          const newState = {
-            ...state,
-            status: "hasMoviesToRender",
-            moviesToRender: preProcessMovies(movieList),
-            currentQuery: query,
-          }
-          setState(newState);
-          localStorage.setItem(
-            currentUser.email,
-            JSON.stringify({
-              isShortMovieOn: newState.isShortMovieOn,
-              moviesToRender: newState.moviesToRender,
-              currentQuery: newState.currentQuery,
-            })
+          const newMovieList = preProcessMovies(
+            filterMoviesByQuery(movieList, query, state.isShortMovieOn)
           );
-        } else {
-          setState({
-            ...state,
-            status: "searchResultEmpty",
-          })
+          if (newMovieList.length !== 0) {
+            const newState = {
+              ...state,
+              status: "hasMoviesToRender",
+              moviesToRender: newMovieList,
+              currentQuery: query,
+            }
+            setState(newState);
+            localStorage.setItem(
+              currentUser.email,
+              JSON.stringify({
+                isShortMovieOn: newState.isShortMovieOn,
+                moviesToRender: newState.moviesToRender,
+                currentQuery: newState.currentQuery,
+              })
+            );
+          } else {
+            setState({
+              ...state,
+              status: "searchResultEmpty",
+            })
+          }
         }
       })
-      .catch(() => {
+      .catch((e) => {
+        console.log(e)
         setState({
           ...state,
           status: "downloadError",
@@ -102,8 +108,8 @@ function Movies({ handleSaveMovie, savedMovies, isMenuActive, onClickBurgerBtn }
         {
           state.status === "hasMoviesToRender" && <MovieCardList
             movies={state.moviesToRender}
-            handleButton={handleSaveMovie} 
-            savedMovies={savedMovies}/>
+            handleButton={handleSaveMovie}
+            savedMovies={savedMovies} />
         }
         {
           state.status === "preloader" && <Preloader isOpen={true} />
