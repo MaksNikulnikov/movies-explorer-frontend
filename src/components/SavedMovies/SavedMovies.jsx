@@ -8,7 +8,7 @@ import MovieCardList from "../MovieCardList/MovieCardList";
 import useFormValidation from "../../hooks/useFormValidation";
 import { filterMoviesByQuery } from "../../utils/utils";
 
-function SavedMovies({ savedMovies, handleDeleteMovie, isMenuActive, onClickBurgerBtn }) {
+function SavedMovies({ savedMovies, handleDeleteMovie, isMenuActive, onClickBurgerBtn, loggedIn }) {
   const [isShortMoviesOn, setIsShortMoviesOn] = React.useState(false);
   const [renderedMovies, setRenderedMovies] = React.useState([]);
 
@@ -22,14 +22,15 @@ function SavedMovies({ savedMovies, handleDeleteMovie, isMenuActive, onClickBurg
     setRenderedMovies(filterMoviesByQuery(savedMovies, query, isShortMoviesOn));
   }
 
-  React.useEffect(()=>{
+  React.useEffect(() => {
     setRenderedMovies(savedMovies);
-  },[savedMovies])
+  }, [savedMovies])
 
   return (
     <>
       <Header>
         <Navigation
+          loggedIn={loggedIn}
           isMenuActive={isMenuActive}
           onClickBurgerBtn={onClickBurgerBtn}
         />

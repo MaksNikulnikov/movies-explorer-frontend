@@ -51,11 +51,9 @@ function App() {
   }
 
   function handleDeleteMovie(deletedSavedMovie) {
-    console.log("deletedMovies", deletedSavedMovie)
     setIsLoading(true);
     const savedMovie = savedMovies.find(
       (savedMovie) => savedMovie.movieId === deletedSavedMovie.movieId);
-      console.log("savedMovies", savedMovie)
     mainApi
       .deleteMovie(savedMovie._id)
       .then(() => {
@@ -114,8 +112,8 @@ function App() {
   }
 
   React.useEffect(() => {
-    setIsLoading(true);
     if (isLoggedIn && currentUser) {
+      setIsLoading(true);
       mainApi
         .getSavedMovies()
         .then(data => {
@@ -148,7 +146,7 @@ function App() {
           setIsLoading(false);
         });
     }
-  }, []);
+  }, [isLoggedIn]);
 
 
   return (
@@ -160,6 +158,7 @@ function App() {
               path="/"
               element={
                 <Main
+                  loggedIn={isLoggedIn}
                   isMenuActive={isMenuActive}
                   onClickBurgerBtn={handleBurgerBtnClick}
                 />

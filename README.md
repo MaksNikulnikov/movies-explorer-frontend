@@ -47,6 +47,6 @@
 ---
 ## *Адрес веб-приложения:*
 
-
+* Ссылка на фронтэнд [фронтенд](https://portfolio.nomoredomains.monster)
 * Ссылка на индивидульный [макет](https://disk.yandex.ru/d/WGfIKffnO0lZHQ), по которому верстался проект.
 * Ссылка на pull-request [pull-request](https://github.com/MaksNikulnikov/movies-explorer-frontend/pull/2#issue-1743950922)
