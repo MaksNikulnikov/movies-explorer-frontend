@@ -6,7 +6,7 @@ import { formatDate } from "../../utils/utils";
 function MovieCard({ handleButton, data, isSaved }) {
   const location = useLocation();
 
-  const handleOnClick = ()=>{
+  const handleOnClick = () => {
     handleButton(data);
   }
 
@@ -14,7 +14,9 @@ function MovieCard({ handleButton, data, isSaved }) {
     <article className="movie-card">
       <h2 className="movie-card__title">{data.nameEN}</h2>
       <span className="movie-card__duration">{`Длительность: ${formatDate(data.duration)}`}</span>
-      <img className="movie-card__thumbnail" src={data.thumbnail} alt="thumbnail" />
+      <a target="_blank" rel="noreferrer" href={data.trailerLink}>
+        <img className="movie-card__thumbnail" src={data.thumbnail} alt="thumbnail" />
+      </a>
       <button
         onClick={handleOnClick}
         className={`movie-card__button ${isSaved && location.pathname === "/movies"

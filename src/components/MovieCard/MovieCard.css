@@ -27,12 +27,15 @@
   text-align: right;
 }
 
+.movie-card a{
+  grid-column: span 2;
+}
+
 .movie-card__thumbnail {
   height: 200px;
   object-fit: cover;
   max-width: 360px;
   width: 100%;
-  grid-column: span 2;
 }
 
 .movie-card__button {
