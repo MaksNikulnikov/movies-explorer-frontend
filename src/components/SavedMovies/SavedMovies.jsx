@@ -6,62 +6,25 @@ import Footer from "../Footer/Footer";
 import SearchForm from "../SearchForm/SearchForm";
 import MovieCardList from "../MovieCardList/MovieCardList";
 import useFormValidation from "../../hooks/useFormValidation";
+import { filterMoviesByQuery } from "../../utils/utils";
 
 function SavedMovies({ savedMovies, handleDeleteMovie, isMenuActive, onClickBurgerBtn }) {
-  const [shortMovies, setShortMovies] = React.useState(false);
+  const [isShortMoviesOn, setIsShortMoviesOn] = React.useState(false);
+  const [renderedMovies, setRenderedMovies] = React.useState([]);
 
   const formValidation = useFormValidation();
 
   const handleShortMovies = () => {
-    setShortMovies(!shortMovies);
+    setIsShortMoviesOn(!isShortMoviesOn);
   }
 
-  const handleSearchSubmit = (querry) => {
-
+  const handleSearchSubmit = (query) => {
+    setRenderedMovies(filterMoviesByQuery(savedMovies, query, isShortMoviesOn));
   }
-  // const handleSearchSubmit = (query) => {
-  //   setState({
-  //     ...state,
-  //     status: "preloader",
-  //   });
-  //   movieApi.getMovies()
-  //     .then((movieList) => {
-  //       if (movieList) {
-  //         const newMovieList = preProcessMovies(
-  //           filterMoviesByQuery(movieList, query, state.isShortMovieOn)
-  //         );
-  //         if (newMovieList.length !== 0) {
-  //           const newState = {
-  //             ...state,
-  //             status: "hasMoviesToRender",
-  //             moviesToRender: newMovieList,
-  //             currentQuery: query,
-  //           }
-  //           setState(newState);
-  //           localStorage.setItem(
-  //             currentUser.email,
-  //             JSON.stringify({
-  //               isShortMovieOn: newState.isShortMovieOn,
-  //               moviesToRender: newState.moviesToRender,
-  //               currentQuery: newState.currentQuery,
-  //             })
-  //           );
-  //         } else {
-  //           setState({
-  //             ...state,
-  //             status: "searchResultEmpty",
-  //           })
-  //         }
-  //       }
-  //     })
-  //     .catch((e) => {
-  //       console.log(e)
-  //       setState({
-  //         ...state,
-  //         status: "downloadError",
-  //       })
-  //     });
-  // }
+
+  React.useEffect(()=>{
+    setRenderedMovies(savedMovies);
+  },[savedMovies])
 
   return (
     <>
@@ -75,13 +38,13 @@ function SavedMovies({ savedMovies, handleDeleteMovie, isMenuActive, onClickBurg
         <SearchForm
           formValidation={formValidation}
           handleShortMovies={handleShortMovies}
-          shortMovies={shortMovies}
+          shortMovies={isShortMoviesOn}
           handleSearchSubmit={handleSearchSubmit}
         />
         <MovieCardList
-          movies={savedMovies}
-          savedMovies={savedMovies}
-          handleButton={handleDeleteMovie} />
+          movies={renderedMovies}
+          savedMovies={renderedMovies}
+          handleDelete={handleDeleteMovie} />
       </main>
       <Footer />
     </>

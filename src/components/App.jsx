@@ -31,38 +31,36 @@ function App() {
   };
 
   function handleSaveMovie(movie) {
-    setIsLoading(true);
-    mainApi
-      .saveMovie(movie)
-      .then(newMovie => {
-        if (!savedMovies.find(item => {
-          return item.movieId === newMovie.movieId
-        })) {
-          const newSavedMovies = [...savedMovies, newMovie];
-          setSavedMovies(newSavedMovies);
-          // localStorage.setItem(
-          //   `${currentUser.email}-savedMovies`,
-          //   JSON.stringify(newSavedMovies));
-        }
-      })
-      .catch(err => {
-        console.error(err);
-      })
-      .finally(() => setIsLoading(false));;
+    if (!savedMovies.find(savedMovie => savedMovie.movieId === movie.id)) {
+      setIsLoading(true);
+      mainApi
+        .saveMovie(movie)
+        .then(newMovie => {
+          if (!savedMovies.find(item => {
+            return item.movieId === newMovie.movieId
+          })) {
+            const newSavedMovies = [...savedMovies, newMovie];
+            setSavedMovies(newSavedMovies);
+          }
+        })
+        .catch(err => {
+          console.error(err);
+        })
+        .finally(() => setIsLoading(false));
+    }
   }
 
   function handleDeleteMovie(deletedSavedMovie) {
+    console.log("deletedMovies", deletedSavedMovie)
     setIsLoading(true);
     const savedMovie = savedMovies.find(
       (savedMovie) => savedMovie.movieId === deletedSavedMovie.movieId);
+      console.log("savedMovies", savedMovie)
     mainApi
       .deleteMovie(savedMovie._id)
       .then(() => {
         const newSavedMovies = savedMovies.filter(savedMovie => deletedSavedMovie.movieId !== savedMovie.movieId);
         setSavedMovies(newSavedMovies);
-        // localStorage.setItem(
-        //   `${currentUser.email}-savedMovies`,
-        //   JSON.stringify(newSavedMovies));
       })
       .catch(err => { console.error(err); }
       )
@@ -114,23 +112,6 @@ function App() {
       .catch(err => { console.error(err); })
       .finally(() => setIsLoading(false));
   }
-
-  // React.useEffect(() => {
-  //   if (isLoggedIn) {
-  //     setIsLoading(true);
-  //     mainApi
-  //       .getUserInfo()
-  //       .then(res => {
-  //         setCurrentUser(res);
-  //         const storedSavedMovies = localStorage.getItem(`${res.email}-savedMovies`);
-  //         if (storedSavedMovies) {
-  //           setSavedMovies(JSON.parse(storedSavedMovies));
-  //         }
-  //       })
-  //       .catch(err => { console.error(err); })
-  //       .finally(() => setIsLoading(false));
-  //   }
-  // }, [isLoggedIn]);
 
   React.useEffect(() => {
     setIsLoading(true);
@@ -190,6 +171,7 @@ function App() {
                 component={Movies}
                 loggedIn={isLoggedIn}
                 handleSaveMovie={handleSaveMovie}
+                handleDeleteMovie={handleDeleteMovie}
                 savedMovies={savedMovies}
                 isMenuActive={isMenuActive}
                 onClickBurgerBtn={handleBurgerBtnClick}

@@ -11,7 +11,7 @@ import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import useFormValidation from '../../hooks/useFormValidation';
 import Preloader from "../Preloader/Preloader";
 
-function Movies({ handleSaveMovie, savedMovies, isMenuActive, onClickBurgerBtn }) {
+function Movies({ handleSaveMovie, savedMovies, isMenuActive, onClickBurgerBtn, handleDeleteMovie }) {
   const currentUser = useContext(CurrentUserContext);
 
   const initialState = {
@@ -108,8 +108,9 @@ function Movies({ handleSaveMovie, savedMovies, isMenuActive, onClickBurgerBtn }
         {
           state.status === "hasMoviesToRender" && <MovieCardList
             movies={state.moviesToRender}
-            handleButton={handleSaveMovie}
-            savedMovies={savedMovies} />
+            handleSave={handleSaveMovie}
+            savedMovies={savedMovies} 
+            handleDelete={handleDeleteMovie}/>
         }
         {
           state.status === "preloader" && <Preloader isOpen={true} />

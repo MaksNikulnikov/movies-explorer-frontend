@@ -6,7 +6,7 @@ import React from "react";
 import { LAPTOP_WIDTH, TABLET_WIDTH } from "../../utils/constants";
 import { LAPTOP_AMOUNT_OF_VIDEOS, PHONE_AMOUNT_OF_VIDEOS, TABLET_AMOUNT_OF_VIDEOS } from "../../utils/config";
 
-function MovieCardList({ handleButton, movies, savedMovies }) {
+function MovieCardList({ handleSave, movies, savedMovies, handleDelete }) {
   const location = useLocation();
 
   const [screenWidth, setScreenWidth] = useState(
@@ -57,7 +57,7 @@ function MovieCardList({ handleButton, movies, savedMovies }) {
 
   useEffect(() => {
     checkIsAllMoviesDisplayed();
-  }, [isAllMoviesDisplayed])
+  }, [isAllMoviesDisplayed]);
 
   return (
     <section className="movie-card-list">
@@ -67,14 +67,35 @@ function MovieCardList({ handleButton, movies, savedMovies }) {
           : ""
           }`}
       >
-        {movies
+        {location.pathname === "/movies" && movies
           .slice(0, getAmountOfMovies())
+          .map((item, i) => {
+            const savedMovie = checkIfSaved(item);
+            return savedMovie ? (
+              <li key={i}>
+                <MovieCard
+                  isSaved={true}
+                  handleButton={handleDelete}
+                  data={savedMovie}
+                />
+              </li>
+            ) : (
+              <li key={i}>
+                <MovieCard
+                  isSaved={false}
+                  handleButton={handleSave}
+                  data={item}
+                />
+              </li>
+            );
+          })}
+        {location.pathname === "/saved-movies" && movies
           .map((item, i) => {
             return (
               <li key={i}>
                 <MovieCard
                   isSaved={checkIfSaved(item)}
-                  handleButton={handleButton}
+                  handleButton={handleDelete}
                   data={item}
                 />
               </li>
