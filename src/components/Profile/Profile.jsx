@@ -5,7 +5,7 @@ import Header from "../Header/Header";
 import Navigation from "../Navigation/Navigation";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
-export default function Profile({ isMenuActive, onClickBurgerBtn, handleProfile, handleLogout}) {
+export default function Profile({ isMenuActive, onClickBurgerBtn, handleProfile, handleLogout, loggedIn}) {
   const currentUser = useContext(CurrentUserContext);
   const { values, handleChange, resetForm, errors, isValid } =
     useFormValidation();
@@ -30,6 +30,7 @@ export default function Profile({ isMenuActive, onClickBurgerBtn, handleProfile,
         <Navigation
           isMenuActive={isMenuActive}
           onClickBurgerBtn={onClickBurgerBtn}
+          loggedIn={loggedIn}
         />
       </Header>
       <main className="profile">

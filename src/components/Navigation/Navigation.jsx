@@ -3,7 +3,7 @@ import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
-function Navigation({ isMenuActive, onClickBurgerBtn }) {
+function Navigation({ isMenuActive, onClickBurgerBtn, loggedIn }) {
   const currentUser = React.useContext(CurrentUserContext);
   const location = useLocation();
 
@@ -13,7 +13,7 @@ function Navigation({ isMenuActive, onClickBurgerBtn }) {
 
   return (
     <>
-      {!currentUser.name ? (
+      {!loggedIn? (
         <nav>
           <ul className="navigation__list">
             <li>

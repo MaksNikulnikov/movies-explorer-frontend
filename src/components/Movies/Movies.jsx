@@ -11,7 +11,7 @@ import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import useFormValidation from '../../hooks/useFormValidation';
 import Preloader from "../Preloader/Preloader";
 
-function Movies({ handleSaveMovie, savedMovies, isMenuActive, onClickBurgerBtn, handleDeleteMovie }) {
+function Movies({ handleSaveMovie, savedMovies, isMenuActive, onClickBurgerBtn, handleDeleteMovie, loggedIn }) {
   const currentUser = useContext(CurrentUserContext);
 
   const initialState = {
@@ -97,6 +97,7 @@ function Movies({ handleSaveMovie, savedMovies, isMenuActive, onClickBurgerBtn, 
         <Navigation
           isMenuActive={isMenuActive}
           onClickBurgerBtn={onClickBurgerBtn}
+          loggedIn={loggedIn}
         />
       </Header>
       <main className="movies">
