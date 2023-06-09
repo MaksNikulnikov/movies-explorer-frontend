@@ -1,4 +1,4 @@
-import { SHORTMOVIES_DURATION } from "./constants";
+import { SHORTMOVIES_DURATION } from "./config";
 
 function formatDate(minutes) {
     const hours = Math.floor(minutes / 60);

@@ -1,4 +1,4 @@
-import { MOVIES_API_URL, falseMovies } from "./constants";
+import { MOVIES_API_URL } from "./config";
 
 class MovieApi {
   constructor({apiURL}){
@@ -17,9 +17,6 @@ class MovieApi {
     }).then((res) => this._requestResult(res));
   };
 
-  getSavedMovies = () => {
-    return falseMovies;
-  };
 }
 
 const movieApi = new MovieApi({apiURL:MOVIES_API_URL});

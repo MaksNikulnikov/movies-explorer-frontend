@@ -1,4 +1,4 @@
-import { MAIN_API_URL } from './constants.jsx';
+import { MAIN_API_URL } from './config';
 
 class Api {
   constructor({ baseUrl }) {

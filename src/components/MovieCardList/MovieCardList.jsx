@@ -3,8 +3,7 @@ import { useState, useEffect, useCallback } from 'react';
 import MovieCard from "../MovieCard/MovieCard";
 import "./MovieCardList.css";
 import React from "react";
-import { LAPTOP_WIDTH, TABLET_WIDTH } from "../../utils/constants";
-import { LAPTOP_AMOUNT_OF_VIDEOS, PHONE_AMOUNT_OF_VIDEOS, TABLET_AMOUNT_OF_VIDEOS } from "../../utils/config";
+import { LAPTOP_AMOUNT_OF_VIDEOS, PHONE_AMOUNT_OF_VIDEOS, TABLET_AMOUNT_OF_VIDEOS, LAPTOP_WIDTH, TABLET_WIDTH } from "../../utils/config";
 
 function MovieCardList({ handleSave, movies, savedMovies, handleDelete }) {
   const location = useLocation();

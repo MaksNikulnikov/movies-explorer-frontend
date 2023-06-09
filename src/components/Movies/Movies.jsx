@@ -10,6 +10,7 @@ import { filterMoviesByQuery, preProcessMovies } from "../../utils/utils";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import useFormValidation from '../../hooks/useFormValidation';
 import Preloader from "../Preloader/Preloader";
+import { LOCAL_STORAGE_KEY } from "../../utils/config";
 
 function Movies({ handleSaveMovie, savedMovies, isMenuActive, onClickBurgerBtn, handleDeleteMovie, loggedIn }) {
   const currentUser = useContext(CurrentUserContext);
@@ -26,6 +27,10 @@ function Movies({ handleSaveMovie, savedMovies, isMenuActive, onClickBurgerBtn, 
   function handleShortMovies() {
     setState({ ...state, isShortMovieOn: !state.isShortMovieOn });
   }
+
+  function saveStateToLocalStorage() {
+    
+   }
 
   const handleSearchSubmit = (query) => {
     setState({
@@ -47,7 +52,7 @@ function Movies({ handleSaveMovie, savedMovies, isMenuActive, onClickBurgerBtn, 
             }
             setState(newState);
             localStorage.setItem(
-              currentUser.email,
+              LOCAL_STORAGE_KEY,
               JSON.stringify({
                 isShortMovieOn: newState.isShortMovieOn,
                 moviesToRender: newState.moviesToRender,
@@ -72,7 +77,7 @@ function Movies({ handleSaveMovie, savedMovies, isMenuActive, onClickBurgerBtn, 
   }
 
   useEffect(() => {
-    const storedData = localStorage.getItem(currentUser.email);
+    const storedData = localStorage.getItem(LOCAL_STORAGE_KEY);
     setState({
       ...state,
       status: "preloader",
@@ -110,8 +115,8 @@ function Movies({ handleSaveMovie, savedMovies, isMenuActive, onClickBurgerBtn, 
           state.status === "hasMoviesToRender" && <MovieCardList
             movies={state.moviesToRender}
             handleSave={handleSaveMovie}
-            savedMovies={savedMovies} 
-            handleDelete={handleDeleteMovie}/>
+            savedMovies={savedMovies}
+            handleDelete={handleDeleteMovie} />
         }
         {
           state.status === "preloader" && <Preloader isOpen={true} />
