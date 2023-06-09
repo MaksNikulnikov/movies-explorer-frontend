@@ -4,7 +4,7 @@ import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
 
 
 function SearchForm({ shortMovies, handleShortMovies, handleSearchSubmit, formValidation }) {
-  const { values, handleChange, isValid, setIsValid } = formValidation;
+  const { values, handleChange, isValid } = formValidation;
   const [errorQuery, setErrorQuery] = React.useState('');
 
   function handleSubmit(e) {
@@ -17,7 +17,7 @@ function SearchForm({ shortMovies, handleShortMovies, handleSearchSubmit, formVa
   };
 
   React.useEffect(() => {
-    setErrorQuery('')
+    setErrorQuery('');
   }, [isValid]);
 
   return (
