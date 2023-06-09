@@ -12,12 +12,16 @@ const MAIN_API_URL = "https://api.portfolio.nomoredomains.monster";
 const SHORTMOVIES_DURATION = 40;
 
 const LOCAL_STORAGE_KEY = "movie-explorer";
+const LOCAL_STORAGE_KEY_SAVE = "movie-explorer-save";
+const LOCAL_STORAGE_KEY_APP = "movie-explorer-saved-movies"
 
 export {
     PHONE_AMOUNT_OF_VIDEOS,
     TABLET_AMOUNT_OF_VIDEOS,
     LAPTOP_AMOUNT_OF_VIDEOS,
     LOCAL_STORAGE_KEY,
+    LOCAL_STORAGE_KEY_SAVE,
+    LOCAL_STORAGE_KEY_APP,
     LAPTOP_WIDTH,
     TABLET_WIDTH,
     PHONE_WIDTH,

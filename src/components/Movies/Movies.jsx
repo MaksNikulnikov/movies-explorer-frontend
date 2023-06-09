@@ -12,7 +12,7 @@ import useFormValidation from '../../hooks/useFormValidation';
 import Preloader from "../Preloader/Preloader";
 import { LOCAL_STORAGE_KEY } from "../../utils/config";
 
-function Movies({ handleSaveMovie, savedMovies, isMenuActive, onClickBurgerBtn, handleDeleteMovie, loggedIn }) {
+function Movies({ handleSave, savedMovies, isMenuActive, onClickBurgerBtn, handleDelete, loggedIn }) {
   const currentUser = useContext(CurrentUserContext);
 
   const initialState = {
@@ -24,13 +24,21 @@ function Movies({ handleSaveMovie, savedMovies, isMenuActive, onClickBurgerBtn, 
   const [state, setState] = useState(initialState);
   const formValidation = useFormValidation();
 
-  function handleShortMovies() {
-    setState({ ...state, isShortMovieOn: !state.isShortMovieOn });
+  const handleShortMovies = () => {
+    const newState = { ...state, isShortMovieOn: !state.isShortMovieOn };
+    setState(newState);
+    saveStateToLocalStorage(newState);
   }
 
-  function saveStateToLocalStorage() {
-    
-   }
+  const saveStateToLocalStorage = (newState) => {
+    localStorage.setItem(
+      LOCAL_STORAGE_KEY,
+      JSON.stringify({
+        isShortMovieOn: newState.isShortMovieOn,
+        moviesToRender: newState.moviesToRender,
+        currentQuery: newState.currentQuery,
+      }));
+  }
 
   const handleSearchSubmit = (query) => {
     setState({
@@ -51,14 +59,7 @@ function Movies({ handleSaveMovie, savedMovies, isMenuActive, onClickBurgerBtn, 
               currentQuery: query,
             }
             setState(newState);
-            localStorage.setItem(
-              LOCAL_STORAGE_KEY,
-              JSON.stringify({
-                isShortMovieOn: newState.isShortMovieOn,
-                moviesToRender: newState.moviesToRender,
-                currentQuery: newState.currentQuery,
-              })
-            );
+            saveStateToLocalStorage(newState);
           } else {
             setState({
               ...state,
@@ -93,7 +94,7 @@ function Movies({ handleSaveMovie, savedMovies, isMenuActive, onClickBurgerBtn, 
         status: "initial",
       })
     }
-  }, [currentUser]);
+  }, [currentUser, loggedIn]);
 
 
   return (
@@ -114,9 +115,9 @@ function Movies({ handleSaveMovie, savedMovies, isMenuActive, onClickBurgerBtn, 
         {
           state.status === "hasMoviesToRender" && <MovieCardList
             movies={state.moviesToRender}
-            handleSave={handleSaveMovie}
+            handleSave={handleSave}
             savedMovies={savedMovies}
-            handleDelete={handleDeleteMovie} />
+            handleDelete={handleDelete} />
         }
         {
           state.status === "preloader" && <Preloader isOpen={true} />

@@ -12,6 +12,7 @@ import NotFound from "./NotFound/NotFound";
 import Profile from "./Profile/Profile";
 import mainApi from "../utils/MainApi";
 import ProtectedRoute from "./ProtectedRoute/ProtectedRoute";
+import { LOCAL_STORAGE_KEY_APP } from "../utils/config";
 
 
 function App() {
@@ -30,6 +31,14 @@ function App() {
     navigate(-1);
   };
 
+  const saveSavedMoviesToLocalStorage = (newSavedMovies) => {
+    localStorage.setItem(
+      LOCAL_STORAGE_KEY_APP,
+      JSON.stringify({
+          savedMovies: newSavedMovies,
+      }));
+  }
+
   function handleSaveMovie(movie) {
     if (!savedMovies.find(savedMovie => savedMovie.movieId === movie.id)) {
       setIsLoading(true);
@@ -41,6 +50,7 @@ function App() {
           })) {
             const newSavedMovies = [...savedMovies, newMovie];
             setSavedMovies(newSavedMovies);
+            saveSavedMoviesToLocalStorage(newSavedMovies);
           }
         })
         .catch(err => {
@@ -59,6 +69,7 @@ function App() {
       .then(() => {
         const newSavedMovies = savedMovies.filter(savedMovie => deletedSavedMovie.movieId !== savedMovie.movieId);
         setSavedMovies(newSavedMovies);
+        saveSavedMoviesToLocalStorage(newSavedMovies);
       })
       .catch(err => { console.error(err); }
       )
@@ -117,8 +128,9 @@ function App() {
       mainApi
         .getSavedMovies()
         .then(data => {
-          const savedMoviesList = data.filter(m => m.owner === currentUser._id);
-          setSavedMovies(savedMoviesList);
+          const restoredSavedMovies = data.filter(m => m.owner === currentUser._id);
+          setSavedMovies(restoredSavedMovies);
+          saveSavedMoviesToLocalStorage(restoredSavedMovies);
         })
         .catch(err => { console.error(err); })
         .finally(() => {
@@ -169,8 +181,8 @@ function App() {
               element={<ProtectedRoute
                 component={Movies}
                 loggedIn={isLoggedIn}
-                handleSaveMovie={handleSaveMovie}
-                handleDeleteMovie={handleDeleteMovie}
+                handleSave={handleSaveMovie}
+                handleDelete={handleDeleteMovie}
                 savedMovies={savedMovies}
                 isMenuActive={isMenuActive}
                 onClickBurgerBtn={handleBurgerBtnClick}
@@ -180,7 +192,7 @@ function App() {
               element={<ProtectedRoute
                 component={SavedMovies}
                 loggedIn={isLoggedIn}
-                handleDeleteMovie={handleDeleteMovie}
+                handleDelete={handleDeleteMovie}
                 savedMovies={savedMovies}
                 isMenuActive={isMenuActive}
                 onClickBurgerBtn={handleBurgerBtnClick}

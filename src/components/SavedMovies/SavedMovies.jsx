@@ -7,24 +7,85 @@ import SearchForm from "../SearchForm/SearchForm";
 import MovieCardList from "../MovieCardList/MovieCardList";
 import useFormValidation from "../../hooks/useFormValidation";
 import { filterMoviesByQuery } from "../../utils/utils";
+import { LOCAL_STORAGE_KEY, LOCAL_STORAGE_KEY_SAVE } from "../../utils/config";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
-function SavedMovies({ savedMovies, handleDeleteMovie, isMenuActive, onClickBurgerBtn, loggedIn }) {
-  const [isShortMoviesOn, setIsShortMoviesOn] = React.useState(false);
-  const [renderedMovies, setRenderedMovies] = React.useState([]);
+function SavedMovies({ savedMovies, handleDelete, isMenuActive, onClickBurgerBtn, loggedIn }) {
+  const currentUser = React.useContext(CurrentUserContext);
 
+  const initialState = {
+    isShortMovieOn: false,
+    moviesToRender: [],
+    currentQuery: "",
+  }
+  const [state, setState] = React.useState(initialState);
   const formValidation = useFormValidation();
 
   const handleShortMovies = () => {
-    setIsShortMoviesOn(!isShortMoviesOn);
+    const newState = { ...state, isShortMovieOn: !state.isShortMovieOn };
+    setState(newState);
+    saveStateToLocalStorage(newState);
+  }
+
+  const saveStateToLocalStorage = (newState) => {
+    localStorage.setItem(
+      LOCAL_STORAGE_KEY_SAVE,
+      JSON.stringify({
+        isShortMovieOn: newState.isShortMovieOn,
+        moviesToRender: newState.moviesToRender,
+        currentQuery: newState.currentQuery,
+      }));
+  }
+
+  const saveSavedMoviesToLocalStorage = (newSavedMovies) => {
+    localStorage.setItem(
+      LOCAL_STORAGE_KEY,
+      JSON.stringify({
+        ...state,
+        savedMovies: newSavedMovies,
+      }));
+  }
+
+  const handleDeleteMovie = (movie) => {
+    handleDelete(movie, saveSavedMoviesToLocalStorage);
   }
 
   const handleSearchSubmit = (query) => {
-    setRenderedMovies(filterMoviesByQuery(savedMovies, query, isShortMoviesOn));
+    const newState = {
+      ...state,
+      moviesToRender: filterMoviesByQuery(
+        savedMovies,
+        query,
+        state.isShortMovieOn),
+    }
+    setState(newState);
+    saveStateToLocalStorage(newState);
   }
 
+
   React.useEffect(() => {
-    setRenderedMovies(savedMovies);
-  }, [savedMovies])
+    const storedData = localStorage.getItem(LOCAL_STORAGE_KEY_SAVE);
+    if (storedData) {
+      const restoredData = JSON.parse(storedData);
+      restoredData.moviesToRender = filterMoviesByQuery(
+        savedMovies,
+        restoredData.currentQuery,
+        restoredData.isShortMovieOn)
+      setState(restoredData);
+      formValidation.values.query = restoredData.currentQuery;
+    } else {
+      const newState = {
+        ...state,
+        moviesToRender: filterMoviesByQuery(
+          savedMovies,
+          "",
+          state.isShortMovieOn),
+      }
+      setState(newState);
+      saveStateToLocalStorage(newState);
+    }
+  }, [currentUser, savedMovies]);
+
 
   return (
     <>
@@ -39,12 +100,12 @@ function SavedMovies({ savedMovies, handleDeleteMovie, isMenuActive, onClickBurg
         <SearchForm
           formValidation={formValidation}
           handleShortMovies={handleShortMovies}
-          shortMovies={isShortMoviesOn}
+          shortMovies={state.isShortMovieOn}
           handleSearchSubmit={handleSearchSubmit}
         />
         <MovieCardList
-          movies={renderedMovies}
-          savedMovies={renderedMovies}
+          movies={state.moviesToRender}
+          savedMovies={savedMovies}
           handleDelete={handleDeleteMovie} />
       </main>
       <Footer />
