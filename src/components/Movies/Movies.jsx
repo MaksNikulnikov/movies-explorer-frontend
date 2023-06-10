@@ -12,7 +12,7 @@ import useFormValidation from '../../hooks/useFormValidation';
 import Preloader from "../Preloader/Preloader";
 import { LOCAL_STORAGE_KEY } from "../../utils/config";
 
-function Movies({ handleSave, savedMovies, isMenuActive, onClickBurgerBtn, handleDelete, loggedIn }) {
+function Movies({ handleSave, savedMovies, setIsInfoTooltip, isMenuActive, onClickBurgerBtn, handleDelete, loggedIn }) {
   const currentUser = useContext(CurrentUserContext);
 
   const initialState = {
@@ -55,9 +55,14 @@ function Movies({ handleSave, savedMovies, isMenuActive, onClickBurgerBtn, handl
       setState(newState);
       saveStateToLocalStorage(newState);
     } else {
+      setIsInfoTooltip({
+        isOpen: true,
+        successful: false,
+        text: "Ничего не найдено",
+      })
       setState({
         ...state,
-        status: "searchResultEmpty",
+        status: "initial",
       })
     }
 
@@ -78,9 +83,14 @@ function Movies({ handleSave, savedMovies, isMenuActive, onClickBurgerBtn, handl
         setState(newState);
         saveStateToLocalStorage(newState);
       } else {
+        setIsInfoTooltip({
+          isOpen: true,
+          successful: false,
+          text: "Ничего не найдено",
+        })
         setState({
           ...state,
-          status: "searchResultEmpty",
+          status: "initial",
         })
       }
     }
@@ -95,11 +105,15 @@ function Movies({ handleSave, savedMovies, isMenuActive, onClickBurgerBtn, handl
       .then((movieList) => {
         handleNewMovieList(movieList, query, true);
       })
-      .catch((e) => {
-        console.log(e);
+      .catch(() => {
+        setIsInfoTooltip({
+          isOpen: true,
+          successful: false,
+          text: "Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз",
+        })
         setState({
           ...state,
-          status: "downloadError",
+          status: "initial",
         })
       });
   }
@@ -158,12 +172,6 @@ function Movies({ handleSave, savedMovies, isMenuActive, onClickBurgerBtn, handl
         }
         {
           state.status === "preloader" && <Preloader isOpen={true} />
-        }
-        {
-          state.status === "downloadError" && <span className="movies__error-message">Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз</span>
-        }
-        {
-          state.status === "searchResultEmpty" && <span className="movies__error-message">Ничего не найдено</span>
         }
       </main>
       <Footer />

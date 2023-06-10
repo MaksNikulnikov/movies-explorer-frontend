@@ -12,6 +12,7 @@ import NotFound from "./NotFound/NotFound";
 import Profile from "./Profile/Profile";
 import mainApi from "../utils/MainApi";
 import ProtectedRoute from "./ProtectedRoute/ProtectedRoute";
+import InfoTooltip from "./InfoTooltip/InfoTooltip";
 import { LOCAL_STORAGE_KEY_APP } from "../utils/config";
 
 
@@ -20,6 +21,11 @@ function App() {
   const [isMenuActive, setIsMenuActive] = React.useState(true);
   const [currentUser, setCurrentUser] = React.useState({});
   const [isLoading, setIsLoading] = React.useState(false);
+  const [isInfoTooltip, setIsInfoTooltip] = React.useState({
+    isOpen: false,
+    successful: true,
+    text: '',
+  });
   const [savedMovies, setSavedMovies] = React.useState([]);
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
   const [isReady, setIsReady] = React.useState(false);
@@ -31,6 +37,10 @@ function App() {
   const goBack = () => {
     navigate(-1);
   };
+
+    function closeInfoTooltip() {
+    setIsInfoTooltip({ ...isInfoTooltip, isOpen: false });
+  }
 
   const saveSavedMoviesToLocalStorage = (newSavedMovies) => {
     localStorage.setItem(
@@ -55,7 +65,11 @@ function App() {
           }
         })
         .catch(err => {
-          console.error(err);
+          setIsInfoTooltip({
+          isOpen: true,
+          successful: false,
+          text: err.message,
+        })
         })
         .finally(() => setIsLoading(false));
     }
@@ -72,7 +86,11 @@ function App() {
         setSavedMovies(newSavedMovies);
         saveSavedMoviesToLocalStorage(newSavedMovies);
       })
-      .catch(err => { console.error(err); }
+      .catch(err => setIsInfoTooltip({
+          isOpen: true,
+          successful: false,
+          text: err.message,
+        })
       )
       .finally(() => setIsLoading(false));;
   }
@@ -86,7 +104,11 @@ function App() {
           handleLogin({ email, password });
         }
       })
-      .catch(err => { console.error(err); })
+      .catch(err => setIsInfoTooltip({
+          isOpen: true,
+          successful: false,
+          text: err.message,
+        }))
       .finally(() => setIsLoading(false));
   }
 
@@ -99,9 +121,18 @@ function App() {
           localStorage.setItem('jwt', jwt.token);
           setIsLoggedIn(true);
           navigate('/movies');
+          setIsInfoTooltip({
+            isOpen: true,
+            successful: true,
+            text: 'Добро пожаловать!',
+          });
         }
       })
-      .catch(err => { console.error(err); })
+      .catch(err => setIsInfoTooltip({
+          isOpen: true,
+          successful: false,
+          text: err.message,
+        }))
       .finally(() => setIsLoading(false));
   }
 
@@ -118,8 +149,17 @@ function App() {
       .updateUser(name, email)
       .then(newUserData => {
         setCurrentUser(newUserData);
+        setIsInfoTooltip({
+          isOpen: true,
+          successful: true,
+          text: 'Ваши данные обновлены!',
+        });
       })
-      .catch(err => { console.error(err); })
+      .catch(err => setIsInfoTooltip({
+          isOpen: true,
+          successful: false,
+          text: err.message,
+        }))
       .finally(() => setIsLoading(false));
   }
 
@@ -133,7 +173,11 @@ function App() {
           setSavedMovies(restoredSavedMovies);
           saveSavedMoviesToLocalStorage(restoredSavedMovies);
         })
-        .catch(err => { console.error(err); })
+        .catch(err => setIsInfoTooltip({
+          isOpen: true,
+          successful: false,
+          text: err.message,
+        }))
         .finally(() => {
           setIsLoading(false);
         });
@@ -155,8 +199,11 @@ function App() {
           }
         })
         .catch(err => {
-          setIsLoggedIn(false);
-          console.error(err);
+          setIsInfoTooltip({
+          isOpen: true,
+          successful: false,
+          text: err.message,
+        })
         })
         .finally(() => {
           setIsLoading(false);
@@ -190,6 +237,7 @@ function App() {
                 loggedIn={isLoggedIn}
                 handleSave={handleSaveMovie}
                 handleDelete={handleDeleteMovie}
+                setIsInfoTooltip={setIsInfoTooltip}
                 savedMovies={savedMovies}
                 isMenuActive={isMenuActive}
                 onClickBurgerBtn={handleBurgerBtnClick}
@@ -200,6 +248,7 @@ function App() {
                 component={SavedMovies}
                 loggedIn={isLoggedIn}
                 handleDelete={handleDeleteMovie}
+                setIsInfoTooltip={setIsInfoTooltip}
                 savedMovies={savedMovies}
                 isMenuActive={isMenuActive}
                 onClickBurgerBtn={handleBurgerBtnClick}
@@ -230,6 +279,10 @@ function App() {
               />} />
             <Route path="*" element={<NotFound goBack={goBack} />} />
           </Routes>
+          <InfoTooltip
+            status={isInfoTooltip}
+            onClose={closeInfoTooltip}
+          />
         </div>
       </CurrentUserContext.Provider>) : (<Preloader isOpen={true} />)}
     </>

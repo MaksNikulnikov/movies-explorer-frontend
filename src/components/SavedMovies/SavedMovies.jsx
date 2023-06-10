@@ -10,7 +10,7 @@ import { filterMoviesByQuery } from "../../utils/utils";
 import { LOCAL_STORAGE_KEY, LOCAL_STORAGE_KEY_SAVE } from "../../utils/config";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
-function SavedMovies({ savedMovies, handleDelete, isMenuActive, onClickBurgerBtn, loggedIn }) {
+function SavedMovies({ savedMovies, setIsInfoTooltip, handleDelete, isMenuActive, onClickBurgerBtn, loggedIn }) {
   const currentUser = React.useContext(CurrentUserContext);
 
   const initialState = {
@@ -60,6 +60,13 @@ function SavedMovies({ savedMovies, handleDelete, isMenuActive, onClickBurgerBtn
     }
     setState(newState);
     saveStateToLocalStorage(newState);
+    if(newState.moviesToRender.length===0){
+      setIsInfoTooltip({
+        isOpen: true,
+        successful: false,
+        text: "Ничего не найдено",
+      })
+    }
   }
 
 
