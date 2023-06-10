@@ -20,6 +20,7 @@ function Movies({ handleSave, savedMovies, isMenuActive, onClickBurgerBtn, handl
     moviesToRender: [],
     currentQuery: "",
     status: "initial",
+    movies: [],
   }
   const [state, setState] = useState(initialState);
   const formValidation = useFormValidation();
@@ -37,44 +38,79 @@ function Movies({ handleSave, savedMovies, isMenuActive, onClickBurgerBtn, handl
         isShortMovieOn: newState.isShortMovieOn,
         moviesToRender: newState.moviesToRender,
         currentQuery: newState.currentQuery,
+        movies: newState.movies,
       }));
   }
 
-  const handleSearchSubmit = (query) => {
+  const handleExistingMovieList = (query) => {
+    const newMovieList =
+      filterMoviesByQuery(state.movies, query, state.isShortMovieOn)
+    if (newMovieList.length !== 0) {
+      const newState = {
+        ...state,
+        status: "hasMoviesToRender",
+        moviesToRender: newMovieList,
+        currentQuery: query,
+      }
+      setState(newState);
+      saveStateToLocalStorage(newState);
+    } else {
+      setState({
+        ...state,
+        status: "searchResultEmpty",
+      })
+    }
+
+  }
+  const handleNewMovieList = (movieList, query) => {
+    if (movieList) {
+      const newMovieList = preProcessMovies(
+        filterMoviesByQuery(movieList, query, state.isShortMovieOn)
+      );
+      if (newMovieList.length !== 0) {
+        const newState = {
+          ...state,
+          status: "hasMoviesToRender",
+          moviesToRender: newMovieList,
+          currentQuery: query,
+          movies: movieList,
+        }
+        setState(newState);
+        saveStateToLocalStorage(newState);
+      } else {
+        setState({
+          ...state,
+          status: "searchResultEmpty",
+        })
+      }
+    }
+  }
+
+  const downloadMovies = (query) => {
     setState({
       ...state,
       status: "preloader",
     });
     movieApi.getMovies()
       .then((movieList) => {
-        if (movieList) {
-          const newMovieList = preProcessMovies(
-            filterMoviesByQuery(movieList, query, state.isShortMovieOn)
-          );
-          if (newMovieList.length !== 0) {
-            const newState = {
-              ...state,
-              status: "hasMoviesToRender",
-              moviesToRender: newMovieList,
-              currentQuery: query,
-            }
-            setState(newState);
-            saveStateToLocalStorage(newState);
-          } else {
-            setState({
-              ...state,
-              status: "searchResultEmpty",
-            })
-          }
-        }
+        handleNewMovieList(movieList, query, true);
       })
       .catch((e) => {
-        console.log(e)
+        console.log(e);
         setState({
           ...state,
           status: "downloadError",
         })
       });
+  }
+
+  const handleSearchSubmit = (query) => {
+    if (state.movies.length > 0) {
+      handleExistingMovieList(query);
+    } else {
+      downloadMovies(query);
+    }
+
   }
 
   useEffect(() => {
@@ -86,6 +122,7 @@ function Movies({ handleSave, savedMovies, isMenuActive, onClickBurgerBtn, handl
     if (storedData) {
       const restoredData = JSON.parse(storedData);
       restoredData.status = "hasMoviesToRender";
+      restoredData.movies = [];
       setState(restoredData);
       formValidation.values.query = restoredData.currentQuery;
     } else {
