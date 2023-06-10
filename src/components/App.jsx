@@ -22,6 +22,7 @@ function App() {
   const [isLoading, setIsLoading] = React.useState(false);
   const [savedMovies, setSavedMovies] = React.useState([]);
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+  const [isReady, setIsReady] = React.useState(false);
 
   const handleBurgerBtnClick = () => {
     setIsMenuActive(!isMenuActive);
@@ -35,7 +36,7 @@ function App() {
     localStorage.setItem(
       LOCAL_STORAGE_KEY_APP,
       JSON.stringify({
-          savedMovies: newSavedMovies,
+        savedMovies: newSavedMovies,
       }));
   }
 
@@ -153,17 +154,23 @@ function App() {
             navigate(path);
           }
         })
-        .catch(err => { console.error(err); })
+        .catch(err => {
+          setIsLoggedIn(false);
+          console.error(err);
+        })
         .finally(() => {
           setIsLoading(false);
+          setIsReady(true);
         });
+    } else {
+      setIsReady(true);
     }
-  }, [isLoggedIn]);
 
+  }, [isLoggedIn]);
 
   return (
     <>
-      <CurrentUserContext.Provider value={currentUser}>
+      {isReady ? (<CurrentUserContext.Provider value={currentUser}>
         <div className="root">
           <Routes>
             <Route
@@ -199,10 +206,18 @@ function App() {
               />} />
             <Route
               path="/signin"
-              element={<Login handleLogin={handleLogin} />} />
+              element={<ProtectedRoute
+                component={Login}
+                loggedIn={!isLoggedIn}
+                handleLogin={handleLogin}
+              />} />
             <Route
               path="/signup"
-              element={<Register handleRegister={handleRegister} />} />
+              element={<ProtectedRoute
+                component={Register}
+                loggedIn={!isLoggedIn}
+                handleRegister={handleRegister}
+              />} />
             <Route
               path='/profile'
               element={<ProtectedRoute
@@ -216,8 +231,7 @@ function App() {
             <Route path="*" element={<NotFound goBack={goBack} />} />
           </Routes>
         </div>
-      </CurrentUserContext.Provider>
-      <Preloader isOpen={isLoading} />
+      </CurrentUserContext.Provider>) : (<Preloader isOpen={true} />)}
     </>
   );
 }
