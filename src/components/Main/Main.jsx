@@ -9,13 +9,14 @@ import Techs from "../Techs/Techs";
 import AboutMe from "../AboutMe/AboutMe";
 import Portfolio from "../Portfolio/Portfolio";
 
-function Main({ isMenuActive, onClickBurgerBtn }) {
+function Main({ isMenuActive, onClickBurgerBtn, loggedIn }) {
   return (
     <>
       <Header>
         <Navigation
           isMenuActive={isMenuActive}
           onClickBurgerBtn={onClickBurgerBtn}
+          loggedIn={loggedIn}
         />
       </Header>
       <main className="main">

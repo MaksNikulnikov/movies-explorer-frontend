@@ -27,12 +27,15 @@
   text-align: right;
 }
 
+.movie-card a{
+  grid-column: span 2;
+}
+
 .movie-card__thumbnail {
-  max-height: 200px;
+  height: 200px;
   object-fit: cover;
   max-width: 360px;
   width: 100%;
-  grid-column: span 2;
 }
 
 .movie-card__button {
@@ -77,7 +80,7 @@
   }
 
   .movie-card__thumbnail {
-    max-height: calc(200px - (1280px - 100vw) / 512 * (200 - 190));
+    height: calc(200px - (1280px - 100vw) / 512 * (200 - 190));
     max-width: calc(360px - (1280px - 100vw) / 512 * (360 - 342));
   }
 }
@@ -107,7 +110,7 @@
   }
 
   .movie-card__thumbnail {
-    max-height: calc(190px - (768px - 100vw) / 448 * (190 - 168));
+    height: calc(190px - (768px - 100vw) / 448 * (190 - 168));
     max-width: calc(342px - (768px - 100vw) / 448 * (342 - 300));
   }
 }
@@ -135,7 +138,7 @@
   }
 
   .movie-card__thumbnail {
-    max-height: 168px;
+    height: 168px;
     max-width: 300px;
   }
 }

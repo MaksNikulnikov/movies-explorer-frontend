@@ -113,8 +113,15 @@
   cursor: pointer;
 }
 
+
 .login__button_disabled {
   cursor: default;
+  background-color: var(--light-grey);
+  color: var(--grey-text);
+}
+
+.login__button:hover{
+  opacity: 0.9;
 }
 
 .login__support {

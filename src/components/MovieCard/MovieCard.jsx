@@ -1,25 +1,31 @@
 import { useLocation } from "react-router-dom";
 import "./MovieCard.css";
 import React from "react";
+import { formatDate } from "../../utils/utils";
 
-function MovieCard({ title, duration, thumbnail, isSaved }) {
+function MovieCard({ handleButton, data, isSaved }) {
   const location = useLocation();
+
+  const handleOnClick = () => {
+    handleButton(data);
+  }
 
   return (
     <article className="movie-card">
-      <h2 className="movie-card__title">{title}</h2>
-      <span className="movie-card__duration">{duration}</span>
-      <img className="movie-card__thumbnail" src={thumbnail} alt="thumbnail" />
+      <h2 className="movie-card__title">{data.nameEN}</h2>
+      <span className="movie-card__duration">{`Длительность: ${formatDate(data.duration)}`}</span>
+      <a target="_blank" rel="noreferrer" href={data.trailerLink}>
+        <img className="movie-card__thumbnail" src={data.thumbnail} alt="thumbnail" />
+      </a>
       <button
-        className={`movie-card__button ${
-          isSaved && location.pathname === "/movies"
-            ? "movie-card__button_saved"
-            : ""
-        } ${
-          location.pathname === "/saved-movies"
+        onClick={handleOnClick}
+        className={`movie-card__button ${isSaved && location.pathname === "/movies"
+          ? "movie-card__button_saved"
+          : ""
+          } ${location.pathname === "/saved-movies"
             ? "movie-card__button_unsave"
             : ""
-        }`}
+          }`}
       >
         Сохранить
       </button>

@@ -4,12 +4,13 @@ import { Link } from "react-router-dom";
 import logo from "../../images/logo.svg";
 import useFormValidation from "../../hooks/useFormValidation";
 
-export default function Register() {
+export default function Register({handleRegister}) {
   const { values, handleChange, resetForm, errors, isValid } =
     useFormValidation();
 
   function handleSubmit(e) {
     e.preventDefault();
+    handleRegister(values);
     resetForm();
   }
 
@@ -35,13 +36,15 @@ export default function Register() {
               <span className="register__label-text">Имя</span>
               <input
                 name="name"
-                className={`register__input ${
-                  errors.name && "register__input_error"
-                }`}
+                className={`register__input ${errors.name && "register__input_error"
+                  }`}
                 onChange={handleChange}
                 value={values.name || ""}
                 type="text"
                 required
+                minLength="2"
+                maxLength="30"
+                pattern="^[A-Za-zА-Яа-яЁё /s -]+$"
               />
               <span className="register__error">{errors.name || ""}</span>
             </label>
@@ -49,9 +52,8 @@ export default function Register() {
               <span className="register__label-text">E-mail</span>
               <input
                 name="email"
-                className={`register__input ${
-                  errors.email && "register__input_error"
-                }`}
+                className={`register__input ${errors.email && "register__input_error"
+                  }`}
                 onChange={handleChange}
                 value={values.email || ""}
                 type="email"
@@ -63,9 +65,8 @@ export default function Register() {
               <span className="register__label-text">Пароль</span>
               <input
                 name="password"
-                className={`register__input ${
-                  errors.password && "register__input_error"
-                }`}
+                className={`register__input ${errors.password && "register__input_error"
+                  }`}
                 onChange={handleChange}
                 value={values.password || ""}
                 type="password"
